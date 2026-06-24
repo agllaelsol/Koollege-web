@@ -5028,14 +5028,7 @@ section[id] {
   transform: rotate(-45deg);
 }
 
-/* Nav variant */
-.cta-nav {
-  min-height: 44px !important;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
-}
-.cta-nav .cta-bg { inset: 0 0 0 44px !important; }
-.cta-nav .cta-label { padding: 10px 18px !important; font-size: .875rem !important; }
-.cta-nav .cta-icon { width: 44px !important; }
+/* Nav variant — ver overrides definitivos al final */
 
 /* 5. Planes — más compactas */
 .pricing-showcase .sk-price-grid {
@@ -5556,7 +5549,7 @@ section[id] {
 @media (max-width: 940px) {
   .cta-nav .cta-label {
     min-width: 0;
-    padding: 0 14px;
+    padding: 10px 14px;
   }
 }
 
@@ -6021,305 +6014,116 @@ section[id] {
   .sk-vl-ctrl-btn { padding: 5px 6px; }
 }
 
-/* ===== v20260624-FIXES — cta-nav deprecated, see cta-button block above ===== */
+/* ===== OVERRIDES DEFINITIVOS ===== */
 
-/* 2. ViiwLink mockup — 25% más grande en desktop */
-.sk-viiwlink-content {
-  grid-template-columns: 220px 1fr 180px !important;
-  min-height: 420px !important;
-}
-
-/* 3. Video central — cubrir sin recorte feo */
-.sk-vl-presenter-video {
-  object-fit: cover !important;
-  object-position: center top !important;
-}
-.sk-vl-presenter-tile {
-  min-height: 320px !important;
-}
-
-/* 4. Tiles de participantes más altos */
-.sk-vl-vtile-video {
-  height: 96px !important;
-}
-
-@media (max-width: 860px) {
-  .sk-viiwlink-content { grid-template-columns: 1fr 150px !important; }
-}
-@media (max-width: 600px) {
-  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
-}
-
-/* ===== v20260624-HERO-FIX ===== */
-
-/* Botones por encima del dashboard */
+/* 1. Hero — botones siempre por encima del dashboard */
 .sk-hero-actions {
   position: relative;
-  z-index: 20;
+  z-index: 30;
   margin-bottom: 48px;
 }
 
-/* Dashboard debajo de los botones, sin transform que suba */
 .sk-product-frame {
   position: relative;
   z-index: 5;
-  margin-top: 40px;
+  margin-top: 48px;
   transform: none;
+  background: #f0f4f9;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,255,255,.18),
+    0 0 80px rgba(9,103,242,.2);
 }
 
-/* ===== v20260624-VIDEO-FIX ===== */
+/* 2. CTA navbar — mismo componente que hero */
+.cta-nav {
+  min-height: 46px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+.cta-nav .cta-bg {
+  inset: 0 0 0 46px;
+}
+.cta-nav .cta-label {
+  padding: 12px 20px;
+  font-size: .875rem;
+}
+.cta-nav .cta-icon {
+  width: 46px;
+}
 
-/* Ventana mockup — ancho máximo generoso */
+/* 3. ViiwLink — logo, layout, mockup */
+.sk-viiwlink-logo-img {
+  width: 200px;
+  height: auto;
+  max-width: none;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.sk-viiwlink-inner {
+  grid-template-columns: 38fr 62fr;
+  gap: 48px;
+  align-items: start;
+}
+
 .sk-viiwlink-window {
-  width: min(100%, 980px) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  width: min(100%, 900px);
+  margin: 0;
 }
 
-/* Grid: chat fijo | video central amplio | participantes fijo */
 .sk-viiwlink-content {
-  display: grid !important;
-  grid-template-columns: 230px minmax(520px, 1fr) 170px !important;
-  min-height: 520px !important;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 160px;
+  min-height: 460px;
 }
 
-/* Área de video central — tamaño real */
 .sk-vl-main-video {
-  width: 100% !important;
-  height: 520px !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
-  background: #0e1520 !important;
+  height: 460px;
+  overflow: hidden;
+  position: relative;
+  flex: none;
 }
 
 .sk-vl-main-video video,
 .sk-vl-presenter-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center top !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
-/* Label del presentador sobre el video */
-.sk-vl-presenter-label {
-  position: absolute !important;
-  z-index: 2 !important;
-  bottom: 10px !important;
-  left: 10px !important;
-}
-
-/* Barra de controles: centrada respecto al video */
+/* 4. Controles — centrados */
 .sk-vl-controls-bar {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 10px 16px !important;
-  position: relative !important;
+  position: relative;
+  justify-content: center;
 }
-
 .sk-vl-ctrl-group {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  justify-content: center !important;
+  justify-content: center;
+}
+.sk-vl-ctrl-end {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* Botón rojo: anclado a la derecha sin romper el centrado del grupo */
-.sk-vl-ctrl-end {
-  position: absolute !important;
-  right: 16px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+/* 5. Rectángulo de auto-preview — eliminado */
+.sk-vl-self-preview {
+  display: none;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .sk-viiwlink-content {
-    grid-template-columns: 180px minmax(0, 1fr) 140px !important;
-  }
-  .sk-vl-main-video { height: 380px !important; }
-}
-@media (max-width: 650px) {
-  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
-  .sk-vl-participants-panel { display: none !important; }
-  .sk-vl-main-video { height: 300px !important; }
-}
-
-/* ===== v20260624-FINAL-OVERRIDE ===== */
-
-/* 1. Hero: botones siempre por encima del dashboard */
-.sk-hero-actions {
-  position: relative !important;
-  z-index: 30 !important;
-  margin-bottom: 48px !important;
-}
-
-.sk-product-frame {
-  position: relative !important;
-  z-index: 5 !important;
-  margin-top: 48px !important;
-  transform: none !important;
-}
-
-/* 2. CTA navbar: mismo componente que hero, limpio */
-.cta-nav {
-  min-height: 46px !important;
-  height: auto !important;
-  overflow: visible !important;
-  display: inline-flex !important;
-  align-items: stretch !important;
-  flex-shrink: 0 !important;
-  background: transparent !important;
-}
-.cta-nav .cta-bg {
-  inset: 0 0 0 46px !important;
-  background: #0967f2 !important;
-}
-.cta-nav .cta-label {
-  padding: 12px 20px !important;
-  font-size: .875rem !important;
-  background: #173a5b !important;
-  color: #fff !important;
-  border-radius: 14px !important;
-}
-.cta-nav .cta-icon {
-  width: 46px !important;
-  color: #fff !important;
-  background: transparent !important;
-}
-
-/* 3. Logo ViiwLink grande */
-.sk-viiwlink-logo-img {
-  width: 200px !important;
-  height: auto !important;
-  max-width: none !important;
-  display: block !important;
-  margin-bottom: 24px !important;
-}
-
-/* 4. Mockup ViiwLink: ventana ancha y video central real */
-.sk-viiwlink-window {
-  width: min(100%, 1080px) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.sk-viiwlink-content {
-  display: grid !important;
-  grid-template-columns: 230px minmax(520px, 1fr) 180px !important;
-  min-height: 520px !important;
-}
-
-.sk-vl-main-video {
-  min-width: 520px !important;
-  height: 520px !important;
-  overflow: hidden !important;
-  position: relative !important;
-}
-
-.sk-vl-main-video video,
-.sk-vl-presenter-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center top !important;
-}
-
-/* ===== v20260624-FINAL2 ===== */
-
-/* CTA navbar: idéntico al hero, mismo componente */
-.cta-nav {
-  min-height: 46px !important;
-  height: auto !important;
-  display: inline-flex !important;
-  align-items: stretch !important;
-  flex-shrink: 0 !important;
-  overflow: visible !important;
-  background: transparent !important;
-  border-radius: 14px !important;
-  text-decoration: none !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,.2) !important;
-}
-.cta-nav .cta-bg {
-  position: absolute !important;
-  inset: 0 0 0 46px !important;
-  background: #0967f2 !important;
-  border-radius: 14px !important;
-  z-index: 0 !important;
-}
-.cta-nav .cta-label {
-  position: relative !important;
-  z-index: 1 !important;
-  padding: 12px 20px !important;
-  font-size: .875rem !important;
-  font-weight: 700 !important;
-  background: #173a5b !important;
-  color: #fff !important;
-  border-radius: 14px !important;
-  white-space: nowrap !important;
-}
-.cta-nav .cta-icon {
-  position: relative !important;
-  z-index: 1 !important;
-  width: 46px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #fff !important;
-  background: transparent !important;
-  flex-shrink: 0 !important;
-}
-.cta-nav .cta-icon svg { stroke: #fff !important; }
-
-/* Logo ViiwLink: 200px */
-.sk-viiwlink-logo-img {
-  width: 200px !important;
-  height: auto !important;
-  max-width: none !important;
-  display: block !important;
-  margin-bottom: 24px !important;
-}
-
-/* Layout ViiwLink: 38% texto / 62% mockup */
-.sk-viiwlink-inner {
-  grid-template-columns: 38fr 62fr !important;
-  gap: 48px !important;
-  align-items: start !important;
-}
-
-/* Mockup max 900px, video sin cortar cabeza */
-.sk-viiwlink-window {
-  width: min(100%, 900px) !important;
-  margin: 0 !important;
-}
-
-.sk-viiwlink-content {
-  grid-template-columns: 200px minmax(400px, 1fr) 160px !important;
-  min-height: 460px !important;
-}
-
-.sk-vl-main-video {
-  height: 460px !important;
-  overflow: hidden !important;
-  position: relative !important;
-}
-
-/* Rectángulo negro esquina superior derecha — eliminado en HTML y CSS */
-.sk-vl-self-preview { display: none !important; }
-
 @media (max-width: 960px) {
-  .sk-viiwlink-inner { grid-template-columns: 1fr !important; }
-  .sk-viiwlink-window { width: 100% !important; }
-  .sk-viiwlink-content { grid-template-columns: 1fr 140px !important; }
-  .sk-vl-main-video { height: 340px !important; }
+  .sk-viiwlink-inner { grid-template-columns: 1fr; }
+  .sk-viiwlink-window { width: 100%; }
+  .sk-viiwlink-content { grid-template-columns: 1fr 140px; }
+  .sk-vl-main-video { height: 340px; }
+  .sk-vl-sidebar { display: none; }
 }
 @media (max-width: 600px) {
-  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
-  .sk-vl-participants-panel { display: none !important; }
-  .sk-vl-main-video { height: 260px !important; }
+  .sk-viiwlink-content { grid-template-columns: 1fr; }
+  .sk-vl-participants-panel { display: none; }
+  .sk-vl-main-video { height: 260px; }
 }
