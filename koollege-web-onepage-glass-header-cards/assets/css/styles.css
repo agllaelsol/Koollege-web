@@ -5716,111 +5716,118 @@ section[id] {
   background: #f5f7fa;
 }
 
-/* MODULE CARDS — premium redisign
-   Estructura original preservada: franja superior, círculo icono, área blanca inferior.
-   Mejoras: degradado premium en franja, glow sutil del módulo, reflejo especular,
-   shadow moderna, hover con elevación + glow incremental.
-*/
+/* ═══════════════════════════════════════════════════════════════
+   MODULE CARDS — v3 premium (referencia visual adjunta)
+   Estructura: franja 38% superior con degradado + reflejo diagonal,
+   área blanca inferior, ícono círculo blanco sobre franja.
+   Glow del módulo en reposo, más intenso en hover.
+   Sin glassmorphism. Sin cambios de layout, colores, iconos.
+═══════════════════════════════════════════════════════════════ */
 .sk-admin-console .sk-admin-module-grid article {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 0 14px;
+  padding: 0 0 16px;
   overflow: hidden;
-  border-radius: 18px;
-  /* Borde interior luminoso sutil */
-  border: 1px solid rgba(255,255,255,.7);
-  /* Fondo blanco sólido en área inferior — máxima legibilidad */
+  border-radius: 16px;
+  /* Borde exterior que recoge el color del módulo en hover */
+  border: 1.5px solid rgba(255,255,255,.6);
   background: #fff;
-  /* Shadow moderna + glow muy sutil del módulo */
+  /* Shadow base + glow sutil del módulo en reposo */
   box-shadow:
-    0 2px 4px rgba(17,31,52,.04),
-    0 8px 24px rgba(17,31,52,.08),
-    0 0 0 1px rgba(17,31,52,.05),
-    0 16px 40px -8px color-mix(in srgb, var(--module) 18%, transparent);
+    0 1px 2px rgba(17,31,52,.04),
+    0 4px 12px rgba(17,31,52,.07),
+    0 12px 24px rgba(17,31,52,.06),
+    0 0 20px color-mix(in srgb, var(--module) 14%, transparent);
   transform: translateZ(0);
   transition:
-    transform .25s cubic-bezier(.22,.68,0,1.2),
-    box-shadow .25s ease,
-    border-color .25s ease;
+    transform 250ms cubic-bezier(.22,1,.36,1),
+    box-shadow 250ms cubic-bezier(.22,1,.36,1),
+    border-color 250ms ease;
 }
 
-/* Franja superior — degradado premium que conserva el color del módulo */
+/* ── Franja superior: 38% de altura de la card ── */
+/* ::before = fondo de color sólido + degradado oscurecimiento abajo */
 .sk-admin-console .sk-admin-module-grid article::before {
   content: "";
   display: block;
   position: static;
   inset: auto;
   width: 100%;
-  height: 60px;
-  border-radius: 0;
+  /* 38% de la min-height (128px) ≈ 48px, coincide con la referencia */
+  height: 52px;
   flex-shrink: 0;
-  /* Degradado: tono más claro arriba → color base → tono más oscuro abajo */
-  background:
-    linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--module) 70%, #fff) 0%,
-      var(--module) 45%,
-      color-mix(in srgb, var(--module) 85%, #000) 100%
-    );
+  border-radius: 0;
+  /* Degradado: color puro arriba → 20% más oscuro abajo (mismo matiz) */
+  background: linear-gradient(
+    180deg,
+    var(--module) 0%,
+    color-mix(in srgb, var(--module) 78%, #000) 100%
+  );
   opacity: 1;
   filter: none;
   transform: none;
 }
 
-/* Reflejo especular tipo producto Apple — línea luminosa en borde superior de la franja */
+/* ── Reflejo diagonal — capa de vidrio premium sobre la franja ── */
+/* ::after = degradado 120deg blanco→transparente, cubre solo la franja */
 .sk-admin-console .sk-admin-module-grid article::after {
   content: "";
-  display: block;
   position: absolute;
   top: 0;
-  left: 8%;
-  right: 8%;
-  height: 1px;
+  left: 0;
+  right: 0;
+  /* Mismo alto que la franja + algo extra para degradado suave */
+  height: 72px;
   background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255,255,255,.7) 30%,
-    rgba(255,255,255,.85) 50%,
-    rgba(255,255,255,.7) 70%,
-    transparent 100%
+    120deg,
+    rgba(255,255,255,.22) 0%,
+    rgba(255,255,255,.06) 55%,
+    rgba(255,255,255,0) 100%
   );
-  z-index: 3;
-  border-radius: 0;
+  z-index: 2;
   pointer-events: none;
+  border-radius: 0;
 }
 
-/* Ícono: círculo con fondo del módulo + borde blanco nítido + sombra */
+/* ── Ícono: círculo blanco con color del módulo ── */
 .sk-admin-console .sk-admin-module-grid i {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 48px;
   height: 48px;
-  margin: -24px auto 11px;
+  /* Flota sobre la línea de separación franja/blanco */
+  margin: -24px auto 12px;
   border-radius: 50%;
-  background: var(--module);
-  color: #fff;
-  border: 3px solid #fff;
+  /* Fondo blanco, color del módulo en el ícono — como en la referencia */
+  background: #fff;
+  color: var(--module);
+  border: none;
   box-shadow:
-    0 4px 12px rgba(17,31,52,.18),
-    0 0 0 1px color-mix(in srgb, var(--module) 30%, transparent);
+    0 2px 8px rgba(17,31,52,.14),
+    0 0 0 2px rgba(255,255,255,.9),
+    0 0 0 3.5px color-mix(in srgb, var(--module) 40%, transparent);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s ease;
+  transition:
+    transform 250ms cubic-bezier(.22,1,.36,1),
+    box-shadow 250ms ease;
 }
 
-/* Ícono blanco sobre fondo de módulo */
+/* ── Ícono: color del módulo (no invertido) ── */
 .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
-  filter: brightness(0) invert(1);
+  /* El ícono toma el color del módulo via color: var(--module) del <i> */
+  filter: none;
 }
 
-/* Texto — negro sobre fondo blanco, legibilidad máxima */
+/* ── Label ── */
 .sk-admin-console .sk-admin-module-grid strong {
   position: relative;
   z-index: 1;
-  padding: 0 12px;
+  padding: 0 10px;
   min-height: 0;
   max-width: 18ch;
   font-size: .7rem;
@@ -5828,27 +5835,29 @@ section[id] {
   text-align: center;
   text-transform: uppercase;
   color: #111f34;
-  line-height: 1.25;
+  line-height: 1.28;
+  letter-spacing: .01em;
 }
 
-/* Hover: elevación 8px + escala 1.03 + glow incremental del módulo */
+/* ── Hover: elevación + glow más intenso ── */
 .sk-admin-console .sk-admin-module-grid article:hover {
   transform: translateY(-8px) scale(1.03);
-  border-color: color-mix(in srgb, var(--module) 35%, rgba(255,255,255,.8));
+  border-color: color-mix(in srgb, var(--module) 40%, rgba(255,255,255,.5));
   box-shadow:
     0 2px 4px rgba(17,31,52,.04),
-    0 16px 40px rgba(17,31,52,.12),
-    0 0 0 1px color-mix(in srgb, var(--module) 25%, transparent),
-    0 24px 60px -8px color-mix(in srgb, var(--module) 35%, transparent);
+    0 12px 24px rgba(17,31,52,.10),
+    0 24px 48px rgba(17,31,52,.08),
+    0 0 32px color-mix(in srgb, var(--module) 28%, transparent);
 }
 
+/* ── Hover en ícono ── */
 .sk-admin-console .sk-admin-module-grid article:hover i {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 20px rgba(17,31,52,.18),
-    0 0 0 3px rgba(255,255,255,.95),
-    0 0 0 5px var(--module),
-    0 0 14px color-mix(in srgb, var(--module) 45%, transparent);
+    0 6px 16px rgba(17,31,52,.14),
+    0 0 0 2px rgba(255,255,255,.95),
+    0 0 0 4px color-mix(in srgb, var(--module) 55%, transparent),
+    0 0 12px color-mix(in srgb, var(--module) 30%, transparent);
 }
 
 /* ===== ViiwLink mockup — replica referencia real ===== */
