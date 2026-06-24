@@ -5448,27 +5448,25 @@ section[id] {
 
 /* ===== v20260623-FIX3 ===== */
 
-/* Nav CTA: same compound component as hero, sized for header */
+/* Nav CTA: inherit hero CTA proportions — NO min-height override */
 .cta-nav {
-  min-height: 40px !important;
-  border-radius: 11px !important;
-  box-shadow: 0 6px 18px rgba(0,0,0,.14) !important;
   flex-shrink: 0;
+  border-radius: 13px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.16);
 }
 
 .cta-nav .cta-label {
-  padding: 0 16px !important;
-  font-size: .85rem !important;
+  padding: 0 20px;
+  font-size: .9rem;
 }
 
 .cta-nav .cta-icon {
-  width: 40px !important;
+  width: 50px;
 }
 
-/* Ensure nav-cta old class no longer conflicts */
 .cta-nav:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.18) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.2);
 }
 
 /* Module cards — glassmorphism premium (colored header + glass body) */
@@ -5552,7 +5550,121 @@ section[id] {
 
 @media (max-width: 940px) {
   .cta-nav .cta-label {
-    min-width: 0 !important;
-    padding: 0 12px !important;
+    min-width: 0;
+    padding: 0 14px;
   }
+}
+
+/* ===== v20260623-FINAL — definitivo, especificidad alta ===== */
+
+/* Dashboard: contenido sólido, nada visible detrás */
+.sk-admin-console .sk-admin-module-grid,
+.sk-product-grid.sk-admin-mock {
+  background: #fff;
+}
+
+.sk-admin-console {
+  background: #f5f7fa;
+}
+
+/* MODULE CARDS — definitivo
+   Layout: flex-column, ::before como franja de color, i flotando sobre la línea,
+   body con glass tint, ícono blanco sobre fondo del color del módulo.
+*/
+.sk-admin-console .sk-admin-module-grid article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(248,250,255,.86);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 8px 24px rgba(17,31,52,.09),
+    inset 0 1px 0 rgba(255,255,255,.85);
+  transform: translateZ(0);
+  transition: transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+}
+
+/* Franja superior de color — posición estática, fluye en flex */
+.sk-admin-console .sk-admin-module-grid article::before {
+  content: "";
+  display: block;
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: 60px;
+  border-radius: 0;
+  flex-shrink: 0;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,.2) 0%, rgba(0,0,0,.14) 100%),
+    var(--module);
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+/* Quitar overlay de glass original */
+.sk-admin-console .sk-admin-module-grid article::after {
+  display: none;
+}
+
+/* Ícono: círculo con fondo del color del módulo + borde blanco + ícono blanco */
+.sk-admin-console .sk-admin-module-grid i {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: -24px auto 11px;
+  border-radius: 50%;
+  background: var(--module);
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 16px rgba(17,31,52,.2);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition: transform .26s ease, box-shadow .26s ease;
+}
+
+/* Ícono siempre blanco sobre fondo de módulo */
+.sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Texto */
+.sk-admin-console .sk-admin-module-grid strong {
+  position: relative;
+  z-index: 1;
+  padding: 0 12px;
+  min-height: 0;
+  max-width: 18ch;
+  font-size: .7rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: #111f34;
+  line-height: 1.25;
+}
+
+/* Hover premium */
+.sk-admin-console .sk-admin-module-grid article:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,.75);
+  box-shadow:
+    0 22px 50px rgba(17,31,52,.12),
+    0 0 0 2px var(--module),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.sk-admin-console .sk-admin-module-grid article:hover i {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 22px rgba(17,31,52,.2),
+    0 0 0 4px rgba(255,255,255,.95),
+    0 0 0 6px var(--module);
 }
