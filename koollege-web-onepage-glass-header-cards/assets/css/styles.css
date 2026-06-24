@@ -6015,3 +6015,65 @@ section[id] {
   .sk-vl-controls-bar { padding: 6px 8px; gap: 3px; }
   .sk-vl-ctrl-btn { padding: 5px 6px; }
 }
+
+/* ===== v20260624-FIXES ===== */
+
+/* 1. CTA navbar — same compound visual as hero, no white bleed */
+.cta-nav {
+  display: inline-flex !important;
+  align-items: stretch !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  height: 42px !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
+  flex-shrink: 0 !important;
+}
+.cta-nav .cta-label {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 18px !important;
+  font-size: .875rem !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  background: var(--navy) !important;
+  white-space: nowrap !important;
+}
+.cta-nav .cta-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  flex-shrink: 0 !important;
+  background: var(--blue) !important;
+  color: #fff !important;
+}
+.cta-nav .cta-icon svg { color: #fff !important; stroke: #fff !important; }
+
+/* 2. ViiwLink mockup — 25% más grande en desktop */
+.sk-viiwlink-content {
+  grid-template-columns: 220px 1fr 180px !important;
+  min-height: 420px !important;
+}
+
+/* 3. Video central — cubrir sin recorte feo */
+.sk-vl-presenter-video {
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+.sk-vl-presenter-tile {
+  min-height: 320px !important;
+}
+
+/* 4. Tiles de participantes más altos */
+.sk-vl-vtile-video {
+  height: 96px !important;
+}
+
+@media (max-width: 860px) {
+  .sk-viiwlink-content { grid-template-columns: 1fr 150px !important; }
+}
+@media (max-width: 600px) {
+  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
+}
