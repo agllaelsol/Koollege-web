@@ -6716,6 +6716,152 @@ section[id] {
   opacity: 1;
 }
 
+/* ===== LOGIN DROPDOWN ===== */
+
+.nav-login-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* El botón hereda el estilo de .nav-login existente, solo resetea lo de <button> */
+button.nav-login {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.login-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 280px;
+  background: #fff;
+  border: 1px solid rgba(17,31,52,.1);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,.07),
+    0 20px 48px -8px rgba(17,31,52,.18),
+    0 0 0 1px rgba(255,255,255,.8);
+  padding: 8px;
+  z-index: 9999;
+  /* Animación de apertura */
+  transform-origin: top right;
+  animation: loginMenuIn .18s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+@keyframes loginMenuIn {
+  from { opacity: 0; transform: scale(.96) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1)  translateY(0);     }
+}
+
+.login-menu[hidden] {
+  display: none;
+}
+
+.login-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #0f1e33;
+  transition: background .15s ease;
+  outline-offset: 2px;
+}
+
+.login-menu__item:hover,
+.login-menu__item:focus-visible {
+  background: #f0f5ff;
+}
+
+.login-menu__item:focus-visible {
+  outline: 2px solid #0967f2;
+}
+
+/* Separa los dos items con un divisor sutil */
+.login-menu__item + .login-menu__item {
+  border-top: 1px solid rgba(17,31,52,.06);
+  border-radius: 0 0 10px 10px;
+}
+.login-menu__item:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.login-menu__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #f0f5ff;
+  color: #0967f2;
+}
+
+.login-menu__item:hover .login-menu__icon {
+  background: #dbeafe;
+}
+
+.login-menu__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.login-menu__text strong {
+  font-size: .875rem;
+  font-weight: 600;
+  color: #0f1e33;
+  line-height: 1.2;
+}
+
+.login-menu__text small {
+  font-size: .72rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.login-menu__arrow {
+  flex-shrink: 0;
+  color: #94a3b8;
+  transition: color .15s ease, transform .15s ease;
+}
+
+.login-menu__item:hover .login-menu__arrow {
+  color: #0967f2;
+  transform: translate(2px, -2px);
+}
+
+/* Mobile: dropdown dentro del menú hamburguesa */
+@media (max-width: 700px) {
+  .nav-login-wrap {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  button.nav-login {
+    width: 100%;
+    text-align: left;
+  }
+
+  .login-menu {
+    position: static;
+    box-shadow: none;
+    border: 1px solid rgba(17,31,52,.08);
+    border-radius: 12px;
+    margin-top: 4px;
+    min-width: 0;
+    width: 100%;
+    animation: none;
+  }
+}
+
 /* ===== FORM STATUS MESSAGES ===== */
 .form-status {
   padding: 12px 16px;

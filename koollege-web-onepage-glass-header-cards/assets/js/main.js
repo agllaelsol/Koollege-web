@@ -187,6 +187,55 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
   });
 });
 
+// ===== LOGIN DROPDOWN =====
+(function () {
+  const btn  = document.getElementById("login-btn");
+  const menu = document.getElementById("login-menu");
+  if (!btn || !menu) return;
+
+  const items = () => [...menu.querySelectorAll("[role='menuitem']")];
+
+  function open() {
+    menu.removeAttribute("hidden");
+    btn.setAttribute("aria-expanded", "true");
+    // Focus primer ítem para navegación por teclado
+    items()[0]?.focus();
+  }
+
+  function close() {
+    menu.setAttribute("hidden", "");
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  function toggle() {
+    btn.getAttribute("aria-expanded") === "true" ? close() : open();
+  }
+
+  btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    if (!document.getElementById("login-wrap")?.contains(e.target)) close();
+  });
+
+  // Navegación por teclado: ArrowDown/Up entre items, Escape para cerrar
+  menu.addEventListener("keydown", (e) => {
+    const list = items();
+    const idx  = list.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); list[(idx + 1) % list.length]?.focus(); }
+    if (e.key === "ArrowUp")   { e.preventDefault(); list[(idx - 1 + list.length) % list.length]?.focus(); }
+    if (e.key === "Escape")    { close(); btn.focus(); }
+    if (e.key === "Tab")       { close(); }
+  });
+
+  btn.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowDown" && btn.getAttribute("aria-expanded") === "true") {
+      e.preventDefault(); items()[0]?.focus();
+    }
+  });
+})();
+
 // ===== VIDEO LAZY LOAD =====
 // Los videos usan data-src; solo se cargan cuando el mockup entra al viewport.
 const lazyVideos = [...document.querySelectorAll("video[data-src]")];
