@@ -128,7 +128,7 @@ section[id] {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   color: #657289;
   font-size: .9rem;
   font-weight: 500;
@@ -143,18 +143,57 @@ section[id] {
   white-space: nowrap;
 }
 
+/* Nav center links — horizontal padding gives breathing room between items */
+.nav-center a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #657289;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: color .22s ease, background .22s ease;
+  text-decoration: none;
+}
+
+/* Underline indicator — animated from center */
+.nav-center a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: calc(100% - 24px);
+  height: 2px;
+  border-radius: 2px;
+  background: #0967f2;
+  transition: transform .22s cubic-bezier(.4,0,.2,1);
+  transform-origin: center;
+}
+
+/* Hover: subtle background tint + darken text */
+.nav-center a:hover {
+  color: var(--navy);
+  background: rgba(17,31,52,.05);
+}
+
+/* Active: navy text + underline */
+.nav-center a.active {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.nav-center a.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Keep old .nav-links selector working for JS (navAnchorLinks queries .nav-links a) */
 .nav-links a:not(.nav-cta) {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   min-height: 38px;
-  transition: color .2s ease, transform .2s ease;
-}
-
-.nav-links a:not(.nav-cta):hover,
-.nav-links a.active:not(.nav-cta) {
-  color: var(--navy);
-  transform: translateY(-1px);
 }
 
 .nav-links .has-caret::after {
@@ -1887,7 +1926,26 @@ section[id] {
     display: contents;
   }
 
-  .nav-links a:not(.nav-cta),
+  /* Mobile: reset desktop pill/underline styles, use full-width list items */
+  .nav-center a {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: .92rem;
+  }
+
+  /* Mobile active: pill background instead of underline */
+  .nav-center a.active {
+    background: rgba(9,103,242,.07);
+    color: #0967f2;
+    font-weight: 700;
+  }
+
+  .nav-center a::after {
+    display: none;
+  }
+
   .nav-links .nav-login {
     min-height: 44px;
     padding: 0 10px;
