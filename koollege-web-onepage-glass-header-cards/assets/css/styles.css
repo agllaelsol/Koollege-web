@@ -6194,27 +6194,45 @@ section[id] {
   transform: rotate(-45deg) !important;
 }
 
-/* ===== VIDEO CENTRAL 520x630 ===== */
+
+/* ===== VIIWLINK MOCKUP COMPACTO ===== */
+
+.sk-viiwlink-window {
+  width: min(100%, 820px) !important;
+  margin: 0 !important;
+}
 
 .sk-viiwlink-content {
-  min-height: 630px !important;
+  display: grid !important;
+  grid-template-columns: 210px minmax(360px, 1fr) 140px !important;
+  height: 540px !important;
+  min-height: 0 !important;
   align-items: stretch !important;
 }
 
 .sk-vl-main {
   display: flex !important;
   flex-direction: column !important;
-  align-items: stretch !important;
   height: 100% !important;
+  background: #10265f !important;
+  overflow: hidden !important;
 }
 
 .sk-vl-main-video {
-  width: 100% !important;
   flex: 1 1 auto !important;
-  min-height: 630px !important;
-  height: 630px !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
   overflow: hidden !important;
   position: relative !important;
+}
+
+.sk-vl-presenter-tile {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
 }
 
 .sk-vl-main-video video,
@@ -6224,12 +6242,30 @@ section[id] {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center top !important;
+  object-position: center 35% !important;
 }
 
-.sk-vl-presenter-tile {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
+.sk-vl-participants-panel {
   height: 100% !important;
+  overflow-y: auto !important;
+}
+
+.sk-vl-sidebar {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 860px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr 130px !important;
+    height: 400px !important;
+  }
+  .sk-vl-sidebar { display: none !important; }
+}
+@media (max-width: 600px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr !important;
+    height: 320px !important;
+  }
+  .sk-vl-participants-panel { display: none !important; }
 }
