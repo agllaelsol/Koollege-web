@@ -137,6 +137,7 @@ section[id] {
 
 .nav-right {
   grid-area: right;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1567,6 +1568,36 @@ section[id] {
   color: rgba(255,255,255,.95);
 }
 
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.55);
+  transition: background .18s ease, color .18s ease;
+}
+
+.footer-social a:hover {
+  background: rgba(255,255,255,.16);
+  color: #fff;
+}
+
+.footer-social svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
 .footer-bottom {
   display: flex;
   width: min(calc(100% - 40px), 980px);
@@ -1946,13 +1977,35 @@ section[id] {
     display: none;
   }
 
-  .nav-links .nav-login {
-    min-height: 44px;
-    padding: 0 10px;
-  }
-
   .nav-links .login-link {
     margin-left: 0;
+  }
+
+  /* En mobile hamburger: login-wrap y botón ocupan todo el ancho */
+  .nav-login-wrap {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .nav-login {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 14px;
+    border-radius: 12px;
+  }
+
+  .login-menu {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    border: 1px solid rgba(17,31,52,.08);
+    border-radius: 14px;
+    margin-top: 6px;
+    animation: none;
+    padding: 6px;
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .nav-cta {
@@ -5252,45 +5305,47 @@ section[id] {
   }
 }
 
-/* 6. Iniciar sesión en nav */
+/* ===== BOTÓN INICIAR SESIÓN — definición única ===== */
 .nav-login {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 38px;
-  padding: 0 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(17,31,52,.12);
-  background: rgba(255,255,255,.72);
-  color: var(--navy) !important;
-  font-size: .88rem;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--navy);
+  font-size: .875rem;
   font-weight: 600;
-  margin-left: auto;
-  transition: background .2s ease, box-shadow .2s ease;
+  font-family: inherit;
+  cursor: pointer;
   white-space: nowrap;
+  transition: background .2s ease, box-shadow .22s cubic-bezier(.22,1,.36,1);
 }
 
-.nav-login:hover {
+.nav-login:hover,
+.nav-login:focus-visible,
+.nav-login[aria-expanded="true"] {
   background: #fff;
-  box-shadow: 0 4px 16px rgba(17,31,52,.08);
+  box-shadow: 0 2px 8px rgba(17,31,52,.06), 0 10px 24px rgba(17,31,52,.10);
+  outline: none;
 }
 
+/* ◎ — círculo que irradia en verde */
 .login-icon {
-  color: #8b96a8;
-  font-size: .9em;
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #22c55e;
+  text-shadow:
+    0 0 6px rgba(34,197,94,.75),
+    0 0 14px rgba(34,197,94,.40);
 }
 
 /* Remove old login-link styles since we now use nav-login */
 .nav-links .login-link {
   display: none;
-}
-
-@media (max-width: 940px) {
-  .nav-login {
-    margin-left: 0;
-    width: 100%;
-    justify-content: center;
-  }
 }
 
 /* Section spacing: enough gap between how-it-works and viiwlink */
@@ -5373,11 +5428,6 @@ section[id] {
 /* Fix 2 — Nav: reduce crowding, fix overflow */
 .nav-links {
   gap: 12px;
-}
-
-.nav-login {
-  padding: 0 12px;
-  font-size: .83rem;
 }
 
 @media (min-width: 941px) and (max-width: 1100px) {
@@ -6396,79 +6446,101 @@ section[id] {
 }
 
 
-/* ===== VIIWLINK MOCKUP COMPACTO ===== */
+/* ===== VIIWLINK MOCKUP — definición única ===== */
 
+/* Ventana: border-radius uniforme, sombra suave, overflow:hidden garantiza redondeo */
 .sk-viiwlink-window {
-  width: min(100%, 820px) !important;
-  margin: 0 !important;
+  width: min(100%, 820px);
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(17,31,52,.10);
+  box-shadow:
+    0 2px 4px rgba(17,31,52,.04),
+    0 12px 32px rgba(17,31,52,.12),
+    0 32px 80px rgba(17,31,52,.14),
+    0 0 0 1px rgba(255,255,255,.55);
+  background: #fff;
 }
 
+/* Topbar: browser chrome (solo resetear lo que estaba en parche anterior) */
+.sk-viiwlink-topbar {
+  gap: 8px;
+}
+
+/* Grid de 3 columnas: chat | video principal | participantes */
 .sk-viiwlink-content {
-  display: grid !important;
-  grid-template-columns: 210px minmax(360px, 1fr) 140px !important;
-  height: 540px !important;
-  min-height: 0 !important;
-  align-items: stretch !important;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 140px;
+  height: 520px;
+  min-height: 0;
+  align-items: stretch;
 }
 
+/* Columna central: fondo oscuro, flex column */
 .sk-vl-main {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  background: #10265f !important;
-  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0e1520;
+  overflow: hidden;
 }
 
+/* Área de video: ocupa todo el espacio restante */
 .sk-vl-main-video {
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
 }
 
+/* Tile del presentador cubre todo el área de video */
 .sk-vl-presenter-tile {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0e1520;
 }
 
-.sk-vl-main-video video,
+/* Video: ocupa todo, sin recorte inapropiado — top centra la cara */
 .sk-vl-presenter-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center 35% !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
+/* Panel de participantes: columna derecha */
 .sk-vl-participants-panel {
-  height: 100% !important;
-  overflow-y: auto !important;
+  height: 100%;
+  overflow-y: auto;
 }
 
+/* Sidebar chat: columna izquierda */
 .sk-vl-sidebar {
-  height: 100% !important;
-  overflow: hidden !important;
+  height: 100%;
+  overflow: hidden;
 }
 
+/* Responsive */
 @media (max-width: 860px) {
   .sk-viiwlink-content {
-    grid-template-columns: 1fr 130px !important;
-    height: 400px !important;
+    grid-template-columns: 1fr 130px;
+    height: 400px;
   }
-  .sk-vl-sidebar { display: none !important; }
+  .sk-vl-sidebar { display: none; }
 }
 @media (max-width: 600px) {
   .sk-viiwlink-content {
-    grid-template-columns: 1fr !important;
-    height: 320px !important;
+    grid-template-columns: 1fr;
+    height: 300px;
   }
-  .sk-vl-participants-panel { display: none !important; }
+  .sk-vl-participants-panel { display: none; }
 }
 
 /* ===== COMPARATIVA SECTION ===== */
@@ -6887,28 +6959,28 @@ section[id] {
 
 /* ===== LOGIN DROPDOWN ===== */
 
+/* nav-login-wrap no necesita position:relative — el ancla es .nav-right */
 .nav-login-wrap {
-  position: relative;
   display: inline-flex;
+  position: static;
 }
 
-/* El botón hereda el estilo de .nav-login existente, solo resetea lo de <button> */
-button.nav-login {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  color: inherit;
-}
-
+/* Dropdown: se ancla a .nav-right (position:relative), right:0 = borde derecho del nav */
 .login-menu {
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
   left: auto;
-  min-width: 360px;
-  max-width: min(520px, calc(100vw - 32px));
+  /* Ancho: 2 columnas caben holgadamente; nunca excede la pantalla */
+  width: min(560px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  overflow: hidden;
+  /* Layout: 2 columnas iguales */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
   background: #fff;
   border: 1px solid rgba(17,31,52,.09);
   border-radius: 20px;
@@ -6916,7 +6988,6 @@ button.nav-login {
     0 4px 6px -1px rgba(0,0,0,.06),
     0 24px 56px -8px rgba(17,31,52,.20),
     0 0 0 1px rgba(255,255,255,.7);
-  padding: 10px;
   z-index: 9999;
   transform-origin: top right;
   animation: loginMenuIn .2s cubic-bezier(.22,1,.36,1) forwards;
@@ -6931,49 +7002,56 @@ button.nav-login {
   display: none;
 }
 
+/* Item: flex column para que el contenido no se desborde */
 .login-menu__item {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 20px;
-  min-height: 76px;
-  border-radius: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 16px 18px;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(17,31,52,.07);
   text-decoration: none;
   color: #0f1e33;
-  transition: background .18s ease;
+  transition: background .18s ease, border-color .18s ease;
   outline-offset: 2px;
+  background: #fafbff;
+}
+
+/* Eliminar divider vertical — no aplica en grid */
+.login-menu__item + .login-menu__item {
+  border-top: none;
 }
 
 .login-menu__item:hover,
 .login-menu__item:focus-visible {
-  background: #f5f8ff;
+  background: #f0f5ff;
+  border-color: rgba(9,103,242,.18);
 }
 
 .login-menu__item:focus-visible {
   outline: 2px solid #0967f2;
 }
 
-/* Subtle divider between items */
-.login-menu__item + .login-menu__item {
-  border-top: 1px solid rgba(17,31,52,.055);
-}
-
 .login-menu__icon {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
+  border-radius: 12px;
   background: #eef3ff;
   color: #0967f2;
   transition: background .18s ease;
 }
 
 .login-menu__icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .login-menu__item:hover .login-menu__icon {
@@ -6981,21 +7059,28 @@ button.nav-login {
 }
 
 .login-menu__text {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .login-menu__text strong {
-  font-size: 1rem;
+  display: block;
+  font-size: .9rem;
   font-weight: 700;
   color: #0f1e33;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .login-menu__text small {
-  font-size: .78rem;
+  display: block;
+  font-size: .72rem;
   color: #64748b;
   font-weight: 400;
   font-family: monospace;
@@ -7003,56 +7088,58 @@ button.nav-login {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 38ch;
 }
 
+/* Flecha: esquina superior derecha */
 .login-menu__arrow {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  color: #b0bac8;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 14px;
+  height: 14px;
+  color: #cbd5e1;
   transition: color .18s ease, transform .18s ease;
+}
+
+/* Necesitamos position relative en el item para la flecha */
+.login-menu__item {
+  position: relative;
 }
 
 .login-menu__item:hover .login-menu__arrow {
   color: #0967f2;
-  transform: translate(3px, -3px);
+  transform: translate(2px, -2px);
 }
 
-/* Mobile: dropdown dentro del menú hamburguesa */
+/* Mobile: dropdown dentro del menú hamburguesa — una sola columna */
 @media (max-width: 700px) {
   .nav-login-wrap {
     width: 100%;
     flex-direction: column;
   }
 
-  button.nav-login {
-    width: 100%;
-    text-align: left;
-  }
-
   .login-menu {
     position: static;
+    width: 100%;
+    max-width: 100%;
     box-shadow: none;
     border: 1px solid rgba(17,31,52,.08);
     border-radius: 14px;
     margin-top: 6px;
-    min-width: 0;
-    width: 100%;
     animation: none;
     padding: 6px;
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .login-menu__item {
-    padding: 14px 16px;
-    min-height: 64px;
-    gap: 14px;
+    padding: 12px 14px 14px;
   }
 
   .login-menu__icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
   }
 
   .login-menu__text strong {
