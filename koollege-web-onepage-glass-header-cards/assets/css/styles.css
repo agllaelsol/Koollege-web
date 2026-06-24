@@ -6078,6 +6078,23 @@ section[id] {
   .sk-viiwlink-content { grid-template-columns: 1fr !important; }
 }
 
+/* ===== v20260624-HERO-FIX ===== */
+
+/* Botones por encima del dashboard */
+.sk-hero-actions {
+  position: relative;
+  z-index: 20;
+  margin-bottom: 48px;
+}
+
+/* Dashboard debajo de los botones, sin transform que suba */
+.sk-product-frame {
+  position: relative;
+  z-index: 5;
+  margin-top: 40px;
+  transform: none;
+}
+
 /* ===== v20260624-VIDEO-FIX ===== */
 
 /* Ventana mockup — ancho máximo generoso */
