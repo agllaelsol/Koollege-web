@@ -1,18 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 58" fill="none" role="img" aria-label="ViiwLink">
-  <!-- Double-loop mark above "ii" -->
-  <path d="M82 6 C77 6 73 10 73 15 C73 20 77 24 82 24 C87 24 90 20 93 15 C96 10 100 6 105 6 C110 6 114 10 114 15 C114 20 110 24 105 24 C100 24 97 20 94 15"
-        stroke="#1a2742" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <!-- v -->
-  <path d="M12 22 L26 50 L40 22" stroke="#1a2742" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- i (left) -->
-  <line x1="54" y1="22" x2="54" y2="50" stroke="#1a2742" stroke-width="4" stroke-linecap="round"/>
-  <!-- i (right, pairs with loop) -->
-  <line x1="84" y1="30" x2="84" y2="50" stroke="#1a2742" stroke-width="4" stroke-linecap="round"/>
-  <line x1="104" y1="30" x2="104" y2="50" stroke="#1a2742" stroke-width="4" stroke-linecap="round"/>
-  <!-- w -->
-  <path d="M118 22 L128 50 L138 34 L148 50 L158 22" stroke="#1a2742" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- link separator -->
-  <line x1="172" y1="18" x2="172" y2="52" stroke="#1a2742" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
-  <!-- link text -->
-  <text x="180" y="48" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="300" letter-spacing="-0.5" fill="#1a2742">link</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 160" fill="none" role="img" aria-label="ViiwLink — A Virtual Life">
+
+  <!-- Infinity / double-loop mark above the "i" in viw -->
+  <!-- Centered roughly at x=175 (middle of the "iw" section) -->
+  <path d="
+    M148 34
+    C148 26 154 20 162 20
+    C170 20 176 26 176 34
+    C176 42 170 48 162 48
+    C154 48 148 42 148 34
+    Z
+  " stroke="#1d2566" stroke-width="5" fill="none" stroke-linejoin="round"/>
+  <path d="
+    M176 34
+    C176 26 182 20 190 20
+    C198 20 204 26 204 34
+    C204 42 198 48 190 48
+    C182 48 176 42 176 34
+    Z
+  " stroke="#1d2566" stroke-width="5" fill="none" stroke-linejoin="round"/>
+
+  <!-- V -->
+  <path d="M18 60 L62 140 L106 60" stroke="#1d2566" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- i (left stem) -->
+  <line x1="136" y1="60" x2="136" y2="140" stroke="#1d2566" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- i (right stem / pairs with loop) -->
+  <line x1="170" y1="60" x2="170" y2="140" stroke="#1d2566" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- W -->
+  <path d="M200 60 L222 140 L244 95 L266 140 L288 60" stroke="#1d2566" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- "link" in lighter weight, right of W -->
+  <text x="310" y="128" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+        font-size="44" font-weight="300" fill="#1d2566" letter-spacing="-1">link</text>
+
+  <!-- "A Virtual Life" tagline -->
+  <text x="212" y="157" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+        font-size="16" font-weight="300" fill="#1d2566" text-anchor="middle" letter-spacing="1" opacity="0.75">A Virtual Life</text>
+
 </svg>
