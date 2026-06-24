@@ -187,6 +187,45 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
   });
 });
 
+// ===== COOKIE CONSENT =====
+(function () {
+  var STORAGE_KEY = 'koo_cookie_consent';
+  var banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+
+  // Si ya hay decisión guardada, no mostrar
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  // Mostrar con pequeño delay para no competir con la animación de página
+  setTimeout(function () { banner.removeAttribute('hidden'); }, 800);
+
+  function dismiss(choice) {
+    // choice: 'all' | 'required' | 'pending'
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      decision: choice,
+      timestamp: new Date().toISOString()
+    }));
+    banner.style.animation = 'none';
+    banner.style.transition = 'opacity .25s ease, transform .25s ease';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateX(-50%) translateY(12px)';
+    setTimeout(function () { banner.setAttribute('hidden', ''); }, 260);
+
+    // Placeholder: cargar analytics opcionales solo si acepta todo
+    if (choice === 'all') {
+      // window.loadOptionalScripts?.();
+    }
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+  document.getElementById('cookie-reject').addEventListener('click', function () { dismiss('required'); });
+  document.getElementById('cookie-manage').addEventListener('click', function () {
+    // Por ahora trata "Manage preferences" como rechazo de opcionales
+    // hasta que exista un modal de preferencias real
+    dismiss('pending');
+  });
+})();
+
 // ===== LOGIN DROPDOWN =====
 (function () {
   const btn  = document.getElementById("login-btn");
