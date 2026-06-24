@@ -4967,26 +4967,40 @@ section[id] {
 
 /* 4. Botón compuesto CTA */
 .cta-button {
+  position: relative;
   display: inline-flex;
   align-items: stretch;
-  border-radius: 14px;
-  overflow: hidden;
-  text-decoration: none;
-  box-shadow: 0 14px 30px rgba(0,0,0,.18);
   min-height: 52px;
+  border-radius: 14px;
+  overflow: visible;
+  isolation: isolate;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0,0,0,.2);
   transition: box-shadow .25s ease, transform .25s ease;
 }
 
 .cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 42px rgba(0,0,0,.24);
+  box-shadow: 0 22px 42px rgba(0,0,0,.28);
+}
+
+.cta-bg {
+  position: absolute;
+  inset: 0 0 0 48px;
+  z-index: 0;
+  border-radius: 14px;
+  background: #0967f2;
 }
 
 .cta-label {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  background: #173b5c;
+  padding: 14px 24px;
+  border-radius: 14px;
+  background: #173a5b;
   color: #fff;
   font-weight: 700;
   font-size: .95rem;
@@ -4994,22 +5008,34 @@ section[id] {
 }
 
 .cta-icon {
-  width: 52px;
+  position: relative;
+  z-index: 1;
+  left: -1px;
   display: flex;
+  width: 52px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  background: #0967f2;
+  border-radius: 14px;
   color: #fff;
-  flex-shrink: 0;
 }
 
 .cta-icon svg {
-  transition: transform .25s ease;
+  transition: transform .3s ease;
 }
 
 .cta-button:hover .cta-icon svg {
-  transform: translate(4px, 4px);
+  transform: rotate(-45deg);
 }
+
+/* Nav variant */
+.cta-nav {
+  min-height: 44px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
+}
+.cta-nav .cta-bg { inset: 0 0 0 44px !important; }
+.cta-nav .cta-label { padding: 10px 18px !important; font-size: .875rem !important; }
+.cta-nav .cta-icon { width: 44px !important; }
 
 /* 5. Planes — más compactas */
 .pricing-showcase .sk-price-grid {
@@ -5446,28 +5472,7 @@ section[id] {
   }
 }
 
-/* ===== v20260623-FIX3 ===== */
-
-/* Nav CTA: inherit hero CTA proportions — NO min-height override */
-.cta-nav {
-  flex-shrink: 0;
-  border-radius: 13px;
-  box-shadow: 0 8px 22px rgba(0,0,0,.16);
-}
-
-.cta-nav .cta-label {
-  padding: 0 20px;
-  font-size: .9rem;
-}
-
-.cta-nav .cta-icon {
-  width: 50px;
-}
-
-.cta-nav:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0,0,0,.2);
-}
+/* ===== v20260623-FIX3 — deprecated, see cta-button block above ===== */
 
 /* Module cards — glassmorphism premium (colored header + glass body) */
 .sk-admin-module-grid article {
@@ -6016,40 +6021,7 @@ section[id] {
   .sk-vl-ctrl-btn { padding: 5px 6px; }
 }
 
-/* ===== v20260624-FIXES ===== */
-
-/* 1. CTA navbar — same compound visual as hero, no white bleed */
-.cta-nav {
-  display: inline-flex !important;
-  align-items: stretch !important;
-  overflow: hidden !important;
-  border-radius: 12px !important;
-  height: 42px !important;
-  min-height: 0 !important;
-  background: transparent !important;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
-  flex-shrink: 0 !important;
-}
-.cta-nav .cta-label {
-  display: flex !important;
-  align-items: center !important;
-  padding: 0 18px !important;
-  font-size: .875rem !important;
-  font-weight: 600 !important;
-  color: #fff !important;
-  background: var(--navy) !important;
-  white-space: nowrap !important;
-}
-.cta-nav .cta-icon {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 42px !important;
-  flex-shrink: 0 !important;
-  background: var(--blue) !important;
-  color: #fff !important;
-}
-.cta-nav .cta-icon svg { color: #fff !important; stroke: #fff !important; }
+/* ===== v20260624-FIXES — cta-nav deprecated, see cta-button block above ===== */
 
 /* 2. ViiwLink mockup — 25% más grande en desktop */
 .sk-viiwlink-content {
@@ -6076,4 +6048,102 @@ section[id] {
 }
 @media (max-width: 600px) {
   .sk-viiwlink-content { grid-template-columns: 1fr !important; }
+}
+
+/* ===== v20260624-HERO-FIX ===== */
+
+/* Botones por encima del dashboard */
+.sk-hero-actions {
+  position: relative;
+  z-index: 20;
+  margin-bottom: 48px;
+}
+
+/* Dashboard debajo de los botones, sin transform que suba */
+.sk-product-frame {
+  position: relative;
+  z-index: 5;
+  margin-top: 40px;
+  transform: none;
+}
+
+/* ===== v20260624-VIDEO-FIX ===== */
+
+/* Ventana mockup — ancho máximo generoso */
+.sk-viiwlink-window {
+  width: min(100%, 980px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Grid: chat fijo | video central amplio | participantes fijo */
+.sk-viiwlink-content {
+  display: grid !important;
+  grid-template-columns: 230px minmax(520px, 1fr) 170px !important;
+  min-height: 520px !important;
+}
+
+/* Área de video central — tamaño real */
+.sk-vl-main-video {
+  width: 100% !important;
+  height: 520px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #0e1520 !important;
+}
+
+.sk-vl-main-video video,
+.sk-vl-presenter-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+/* Label del presentador sobre el video */
+.sk-vl-presenter-label {
+  position: absolute !important;
+  z-index: 2 !important;
+  bottom: 10px !important;
+  left: 10px !important;
+}
+
+/* Barra de controles: centrada respecto al video */
+.sk-vl-controls-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 16px !important;
+  position: relative !important;
+}
+
+.sk-vl-ctrl-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  justify-content: center !important;
+}
+
+/* Botón rojo: anclado a la derecha sin romper el centrado del grupo */
+.sk-vl-ctrl-end {
+  position: absolute !important;
+  right: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 180px minmax(0, 1fr) 140px !important;
+  }
+  .sk-vl-main-video { height: 380px !important; }
+}
+@media (max-width: 650px) {
+  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
+  .sk-vl-participants-panel { display: none !important; }
+  .sk-vl-main-video { height: 300px !important; }
 }
