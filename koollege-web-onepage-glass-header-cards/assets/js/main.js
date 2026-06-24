@@ -186,3 +186,180 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
     rail.style.animationPlayState = "running";
   });
 });
+
+// ===== COOKIE CONSENT =====
+(function () {
+  var STORAGE_KEY = 'koo_cookie_consent';
+  var banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+
+  // Si ya hay decisión guardada, no mostrar
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  // Mostrar con pequeño delay para no competir con la animación de página
+  setTimeout(function () { banner.removeAttribute('hidden'); }, 800);
+
+  function dismiss(choice) {
+    // choice: 'all' | 'required' | 'pending'
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      decision: choice,
+      timestamp: new Date().toISOString()
+    }));
+    banner.style.animation = 'none';
+    banner.style.transition = 'opacity .25s ease, transform .25s ease';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateX(-50%) translateY(12px)';
+    setTimeout(function () { banner.setAttribute('hidden', ''); }, 260);
+
+    // Placeholder: cargar analytics opcionales solo si acepta todo
+    if (choice === 'all') {
+      // window.loadOptionalScripts?.();
+    }
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+  document.getElementById('cookie-reject').addEventListener('click', function () { dismiss('required'); });
+  document.getElementById('cookie-manage').addEventListener('click', function () {
+    // Por ahora trata "Manage preferences" como rechazo de opcionales
+    // hasta que exista un modal de preferencias real
+    dismiss('pending');
+  });
+})();
+
+// ===== LOGIN DROPDOWN =====
+(function () {
+  const btn  = document.getElementById("login-btn");
+  const menu = document.getElementById("login-menu");
+  if (!btn || !menu) return;
+
+  const items = () => [...menu.querySelectorAll("[role='menuitem']")];
+
+  function open() {
+    menu.removeAttribute("hidden");
+    btn.setAttribute("aria-expanded", "true");
+    // Focus primer ítem para navegación por teclado
+    items()[0]?.focus();
+  }
+
+  function close() {
+    menu.setAttribute("hidden", "");
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  function toggle() {
+    btn.getAttribute("aria-expanded") === "true" ? close() : open();
+  }
+
+  btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    if (!document.getElementById("login-wrap")?.contains(e.target)) close();
+  });
+
+  // Navegación por teclado: ArrowDown/Up entre items, Escape para cerrar
+  menu.addEventListener("keydown", (e) => {
+    const list = items();
+    const idx  = list.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); list[(idx + 1) % list.length]?.focus(); }
+    if (e.key === "ArrowUp")   { e.preventDefault(); list[(idx - 1 + list.length) % list.length]?.focus(); }
+    if (e.key === "Escape")    { close(); btn.focus(); }
+    if (e.key === "Tab")       { close(); }
+  });
+
+  btn.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowDown" && btn.getAttribute("aria-expanded") === "true") {
+      e.preventDefault(); items()[0]?.focus();
+    }
+  });
+})();
+
+// ===== VIDEO LAZY LOAD =====
+// Los videos usan data-src; solo se cargan cuando el mockup entra al viewport.
+const lazyVideos = [...document.querySelectorAll("video[data-src]")];
+if (lazyVideos.length) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const vid = entry.target;
+      vid.src = vid.dataset.src;
+      vid.removeAttribute("data-src");
+      vid.play().catch(() => {});
+      videoObserver.unobserve(vid);
+    });
+  }, { rootMargin: "200px" });
+  lazyVideos.forEach((v) => videoObserver.observe(v));
+}
+
+// ===== IMG ONERROR (sin inline handlers) =====
+document.querySelectorAll("img.sk-viiwlink-logo-img, img.sk-vl-topbar-logo").forEach((img) => {
+  img.addEventListener("error", () => { img.style.display = "none"; });
+});
+
+// ===== FORMULARIO DE DEMO =====
+const demoForm = document.getElementById("demo-form");
+const formStatus = document.getElementById("form-status");
+const formSubmitBtn = document.getElementById("form-submit-btn");
+
+if (demoForm) {
+  demoForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Honeypot check (cliente)
+    if (demoForm.website && demoForm.website.value) return;
+
+    // Validación básica
+    const email = demoForm.email.value.trim();
+    const emailErr = document.getElementById("email-err");
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!emailOk) {
+      emailErr.textContent = "Ingresa un correo válido.";
+      emailErr.removeAttribute("hidden");
+      demoForm.email.setAttribute("aria-invalid", "true");
+      demoForm.email.focus();
+      return;
+    }
+    emailErr.setAttribute("hidden", "");
+    demoForm.email.removeAttribute("aria-invalid");
+
+    const message = demoForm.message ? demoForm.message.value : "";
+    if (message.length > 1000) {
+      showFormStatus("El mensaje no puede superar 1,000 caracteres.", "error");
+      return;
+    }
+
+    // UI de carga
+    formSubmitBtn.disabled = true;
+    formSubmitBtn.textContent = "Enviando…";
+    showFormStatus("", null);
+
+    try {
+      const res = await fetch("send.php", {
+        method: "POST",
+        body: new FormData(demoForm),
+        headers: { "Accept": "application/json" }
+      });
+      if (res.ok) {
+        showFormStatus("¡Listo! Te contactaremos en menos de 24 horas para confirmar tu demo.", "success");
+        demoForm.reset();
+      } else {
+        const text = await res.text().catch(() => "");
+        showFormStatus(text || "Ocurrió un error. Intenta de nuevo.", "error");
+      }
+    } catch {
+      showFormStatus("No se pudo enviar. Revisa tu conexión e intenta de nuevo.", "error");
+    } finally {
+      formSubmitBtn.disabled = false;
+      formSubmitBtn.textContent = "Agendar demo";
+    }
+  });
+}
+
+function showFormStatus(msg, type) {
+  if (!formStatus) return;
+  if (!msg) { formStatus.setAttribute("hidden", ""); return; }
+  formStatus.textContent = msg;
+  formStatus.className = "form-status form-status--" + type;
+  formStatus.removeAttribute("hidden");
+}
