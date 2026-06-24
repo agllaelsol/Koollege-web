@@ -6077,3 +6077,84 @@ section[id] {
 @media (max-width: 600px) {
   .sk-viiwlink-content { grid-template-columns: 1fr !important; }
 }
+
+/* ===== v20260624-VIDEO-FIX ===== */
+
+/* Ventana mockup — ancho máximo generoso */
+.sk-viiwlink-window {
+  width: min(100%, 980px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Grid: chat fijo | video central amplio | participantes fijo */
+.sk-viiwlink-content {
+  display: grid !important;
+  grid-template-columns: 230px minmax(520px, 1fr) 170px !important;
+  min-height: 520px !important;
+}
+
+/* Área de video central — tamaño real */
+.sk-vl-main-video {
+  width: 100% !important;
+  height: 520px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #0e1520 !important;
+}
+
+.sk-vl-main-video video,
+.sk-vl-presenter-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+/* Label del presentador sobre el video */
+.sk-vl-presenter-label {
+  position: absolute !important;
+  z-index: 2 !important;
+  bottom: 10px !important;
+  left: 10px !important;
+}
+
+/* Barra de controles: centrada respecto al video */
+.sk-vl-controls-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 16px !important;
+  position: relative !important;
+}
+
+.sk-vl-ctrl-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  justify-content: center !important;
+}
+
+/* Botón rojo: anclado a la derecha sin romper el centrado del grupo */
+.sk-vl-ctrl-end {
+  position: absolute !important;
+  right: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 180px minmax(0, 1fr) 140px !important;
+  }
+  .sk-vl-main-video { height: 380px !important; }
+}
+@media (max-width: 650px) {
+  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
+  .sk-vl-participants-panel { display: none !important; }
+  .sk-vl-main-video { height: 300px !important; }
+}
