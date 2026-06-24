@@ -5658,9 +5658,10 @@ section[id] {
   background: #f5f7fa;
 }
 
-/* MODULE CARDS — definitivo
-   Layout: flex-column, ::before como franja de color, i flotando sobre la línea,
-   body con glass tint, ícono blanco sobre fondo del color del módulo.
+/* MODULE CARDS — premium redisign
+   Estructura original preservada: franja superior, círculo icono, área blanca inferior.
+   Mejoras: degradado premium en franja, glow sutil del módulo, reflejo especular,
+   shadow moderna, hover con elevación + glow incremental.
 */
 .sk-admin-console .sk-admin-module-grid article {
   display: flex;
@@ -5669,18 +5670,24 @@ section[id] {
   padding: 0 0 14px;
   overflow: hidden;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.55);
-  background: rgba(248,250,255,.86);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  /* Borde interior luminoso sutil */
+  border: 1px solid rgba(255,255,255,.7);
+  /* Fondo blanco sólido en área inferior — máxima legibilidad */
+  background: #fff;
+  /* Shadow moderna + glow muy sutil del módulo */
   box-shadow:
-    0 8px 24px rgba(17,31,52,.09),
-    inset 0 1px 0 rgba(255,255,255,.85);
+    0 2px 4px rgba(17,31,52,.04),
+    0 8px 24px rgba(17,31,52,.08),
+    0 0 0 1px rgba(17,31,52,.05),
+    0 16px 40px -8px color-mix(in srgb, var(--module) 18%, transparent);
   transform: translateZ(0);
-  transition: transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+  transition:
+    transform .25s cubic-bezier(.22,.68,0,1.2),
+    box-shadow .25s ease,
+    border-color .25s ease;
 }
 
-/* Franja superior de color — posición estática, fluye en flex */
+/* Franja superior — degradado premium que conserva el color del módulo */
 .sk-admin-console .sk-admin-module-grid article::before {
   content: "";
   display: block;
@@ -5690,20 +5697,42 @@ section[id] {
   height: 60px;
   border-radius: 0;
   flex-shrink: 0;
+  /* Degradado: tono más claro arriba → color base → tono más oscuro abajo */
   background:
-    linear-gradient(155deg, rgba(255,255,255,.2) 0%, rgba(0,0,0,.14) 100%),
-    var(--module);
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--module) 70%, #fff) 0%,
+      var(--module) 45%,
+      color-mix(in srgb, var(--module) 85%, #000) 100%
+    );
   opacity: 1;
   filter: none;
   transform: none;
 }
 
-/* Quitar overlay de glass original */
+/* Reflejo especular tipo producto Apple — línea luminosa en borde superior de la franja */
 .sk-admin-console .sk-admin-module-grid article::after {
-  display: none;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.7) 30%,
+    rgba(255,255,255,.85) 50%,
+    rgba(255,255,255,.7) 70%,
+    transparent 100%
+  );
+  z-index: 3;
+  border-radius: 0;
+  pointer-events: none;
 }
 
-/* Ícono: círculo con fondo del color del módulo + borde blanco + ícono blanco */
+/* Ícono: círculo con fondo del módulo + borde blanco nítido + sombra */
 .sk-admin-console .sk-admin-module-grid i {
   position: relative;
   z-index: 2;
@@ -5716,18 +5745,20 @@ section[id] {
   background: var(--module);
   color: #fff;
   border: 3px solid #fff;
-  box-shadow: 0 4px 16px rgba(17,31,52,.2);
+  box-shadow:
+    0 4px 12px rgba(17,31,52,.18),
+    0 0 0 1px color-mix(in srgb, var(--module) 30%, transparent);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  transition: transform .26s ease, box-shadow .26s ease;
+  transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s ease;
 }
 
-/* Ícono siempre blanco sobre fondo de módulo */
+/* Ícono blanco sobre fondo de módulo */
 .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
   filter: brightness(0) invert(1);
 }
 
-/* Texto */
+/* Texto — negro sobre fondo blanco, legibilidad máxima */
 .sk-admin-console .sk-admin-module-grid strong {
   position: relative;
   z-index: 1;
@@ -5742,22 +5773,24 @@ section[id] {
   line-height: 1.25;
 }
 
-/* Hover premium */
+/* Hover: elevación 8px + escala 1.03 + glow incremental del módulo */
 .sk-admin-console .sk-admin-module-grid article:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255,255,255,.75);
+  transform: translateY(-8px) scale(1.03);
+  border-color: color-mix(in srgb, var(--module) 35%, rgba(255,255,255,.8));
   box-shadow:
-    0 22px 50px rgba(17,31,52,.12),
-    0 0 0 2px var(--module),
-    inset 0 1px 0 rgba(255,255,255,.9);
+    0 2px 4px rgba(17,31,52,.04),
+    0 16px 40px rgba(17,31,52,.12),
+    0 0 0 1px color-mix(in srgb, var(--module) 25%, transparent),
+    0 24px 60px -8px color-mix(in srgb, var(--module) 35%, transparent);
 }
 
 .sk-admin-console .sk-admin-module-grid article:hover i {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 22px rgba(17,31,52,.2),
-    0 0 0 4px rgba(255,255,255,.95),
-    0 0 0 6px var(--module);
+    0 8px 20px rgba(17,31,52,.18),
+    0 0 0 3px rgba(255,255,255,.95),
+    0 0 0 5px var(--module),
+    0 0 14px color-mix(in srgb, var(--module) 45%, transparent);
 }
 
 /* ===== ViiwLink mockup — replica referencia real ===== */
