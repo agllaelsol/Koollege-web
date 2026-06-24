@@ -6127,3 +6127,69 @@ section[id] {
   .sk-vl-participants-panel { display: none; }
   .sk-vl-main-video { height: 260px; }
 }
+
+/* ===== CTA NAV — forzado con alta especificidad ===== */
+
+.nav-links .cta-button.cta-nav {
+  position: relative;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: 0 14px 32px rgba(7,18,38,.18) !important;
+  flex: 0 0 auto !important;
+}
+
+.nav-links .cta-button.cta-nav .cta-bg {
+  position: absolute !important;
+  inset: 0 0 0 48px !important;
+  z-index: 0 !important;
+  border-radius: 16px !important;
+  background: #0967f2 !important;
+}
+
+.nav-links .cta-button.cta-nav .cta-label {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 48px !important;
+  padding: 0 24px !important;
+  border-radius: 16px !important;
+  background: #173a5b !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+.nav-links .cta-button.cta-nav .cta-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  left: -1px !important;
+  display: flex !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  background: transparent !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-links .cta-button.cta-nav .cta-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  transition: transform .3s ease !important;
+}
+
+.nav-links .cta-button.cta-nav:hover .cta-icon svg {
+  transform: rotate(-45deg) !important;
+}
