@@ -6147,3 +6147,85 @@ section[id] {
   .sk-vl-participants-panel { display: none !important; }
   .sk-vl-main-video { height: 300px !important; }
 }
+
+/* ===== v20260624-FINAL-OVERRIDE ===== */
+
+/* 1. Hero: botones siempre por encima del dashboard */
+.sk-hero-actions {
+  position: relative !important;
+  z-index: 30 !important;
+  margin-bottom: 48px !important;
+}
+
+.sk-product-frame {
+  position: relative !important;
+  z-index: 5 !important;
+  margin-top: 48px !important;
+  transform: none !important;
+}
+
+/* 2. CTA navbar: mismo componente que hero, limpio */
+.cta-nav {
+  min-height: 46px !important;
+  height: auto !important;
+  overflow: visible !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+}
+.cta-nav .cta-bg {
+  inset: 0 0 0 46px !important;
+  background: #0967f2 !important;
+}
+.cta-nav .cta-label {
+  padding: 12px 20px !important;
+  font-size: .875rem !important;
+  background: #173a5b !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+}
+.cta-nav .cta-icon {
+  width: 46px !important;
+  color: #fff !important;
+  background: transparent !important;
+}
+
+/* 3. Logo ViiwLink grande */
+.sk-viiwlink-logo-img {
+  width: 200px !important;
+  height: auto !important;
+  max-width: none !important;
+  display: block !important;
+  margin-bottom: 24px !important;
+}
+
+/* 4. Mockup ViiwLink: ventana ancha y video central real */
+.sk-viiwlink-window {
+  width: min(100%, 1080px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.sk-viiwlink-content {
+  display: grid !important;
+  grid-template-columns: 230px minmax(520px, 1fr) 180px !important;
+  min-height: 520px !important;
+}
+
+.sk-vl-main-video {
+  min-width: 520px !important;
+  height: 520px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.sk-vl-main-video video,
+.sk-vl-presenter-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
