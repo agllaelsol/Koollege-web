@@ -2821,8 +2821,9 @@ section[id] {
 }
 
 .sk-pill {
-  border-color: rgba(255,255,255,.22);
-  background: rgba(255,255,255,.12);
+  border-color: transparent;
+  background: transparent;
+  color: #fff;
 }
 
 .sk-hero-note,
@@ -4715,9 +4716,9 @@ section[id] {
 }
 
 .sk-pill {
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(255,255,255,.1);
-  color: #8fb7ff;
+  border: none;
+  background: transparent;
+  color: #fff;
 }
 
 .sk-hero h1 {
