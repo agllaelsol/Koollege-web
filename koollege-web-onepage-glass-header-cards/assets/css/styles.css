@@ -1947,24 +1947,21 @@ section[id] {
     display: none;
   }
 
-  .nav-links .nav-login {
-    min-height: 44px;
-    padding: 0 10px;
-  }
-
   .nav-links .login-link {
     margin-left: 0;
   }
 
-  /* En mobile hamburger: login-wrap flota en el menú, dropdown va estático */
+  /* En mobile hamburger: login-wrap y botón ocupan todo el ancho */
   .nav-login-wrap {
     width: 100%;
     flex-direction: column;
   }
 
-  button.nav-login {
+  .nav-login {
     width: 100%;
-    text-align: left;
+    justify-content: flex-start;
+    padding: 0 14px;
+    border-radius: 12px;
   }
 
   .login-menu {
@@ -5278,45 +5275,47 @@ section[id] {
   }
 }
 
-/* 6. Iniciar sesión en nav */
+/* ===== BOTÓN INICIAR SESIÓN — definición única ===== */
 .nav-login {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 38px;
-  padding: 0 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(17,31,52,.12);
-  background: rgba(255,255,255,.72);
-  color: var(--navy) !important;
-  font-size: .88rem;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--navy);
+  font-size: .875rem;
   font-weight: 600;
-  margin-left: auto;
-  transition: background .2s ease, box-shadow .2s ease;
+  font-family: inherit;
+  cursor: pointer;
   white-space: nowrap;
+  transition: background .2s ease, box-shadow .22s cubic-bezier(.22,1,.36,1);
 }
 
-.nav-login:hover {
+.nav-login:hover,
+.nav-login:focus-visible,
+.nav-login[aria-expanded="true"] {
   background: #fff;
-  box-shadow: 0 4px 16px rgba(17,31,52,.08);
+  box-shadow: 0 2px 8px rgba(17,31,52,.06), 0 10px 24px rgba(17,31,52,.10);
+  outline: none;
 }
 
+/* ◎ — círculo que irradia en verde */
 .login-icon {
-  color: #8b96a8;
-  font-size: .9em;
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #22c55e;
+  text-shadow:
+    0 0 6px rgba(34,197,94,.75),
+    0 0 14px rgba(34,197,94,.40);
 }
 
 /* Remove old login-link styles since we now use nav-login */
 .nav-links .login-link {
   display: none;
-}
-
-@media (max-width: 940px) {
-  .nav-login {
-    margin-left: 0;
-    width: 100%;
-    justify-content: center;
-  }
 }
 
 /* Section spacing: enough gap between how-it-works and viiwlink */
@@ -5399,11 +5398,6 @@ section[id] {
 /* Fix 2 — Nav: reduce crowding, fix overflow */
 .nav-links {
   gap: 12px;
-}
-
-.nav-login {
-  padding: 0 12px;
-  font-size: .83rem;
 }
 
 @media (min-width: 941px) and (max-width: 1100px) {
@@ -6919,15 +6913,6 @@ section[id] {
   position: static;
 }
 
-button.nav-login {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  color: inherit;
-}
-
 /* Dropdown: se ancla a .nav-right (position:relative), right:0 = borde derecho del nav */
 .login-menu {
   position: absolute;
@@ -7079,11 +7064,6 @@ button.nav-login {
   .nav-login-wrap {
     width: 100%;
     flex-direction: column;
-  }
-
-  button.nav-login {
-    width: 100%;
-    text-align: left;
   }
 
   .login-menu {
