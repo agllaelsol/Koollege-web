@@ -5817,8 +5817,17 @@ section[id] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, #1a2840 0%, #0e1520 100%);
+  background: #0e1520;
   min-height: 260px;
+  overflow: hidden;
+}
+
+.sk-vl-presenter-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sk-vl-presenter-gradient {
@@ -5868,10 +5877,17 @@ section[id] {
 
 .sk-vl-vtile-video {
   height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.sk-vl-vtile-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sk-vl-vtile-bar {
