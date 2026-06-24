@@ -580,8 +580,11 @@ section[id] {
   padding: 112px 0;
 }
 
-.sk-orbit-section,
-.sk-comparison {
+.sk-faq-section {
+  background: #fff;
+}
+
+.sk-orbit-section {
   position: relative;
   overflow: hidden;
   background:
@@ -6041,21 +6044,7 @@ section[id] {
     0 0 80px rgba(9,103,242,.2);
 }
 
-/* 2. CTA navbar — mismo componente que hero */
-.cta-nav {
-  min-height: 46px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.2);
-}
-.cta-nav .cta-bg {
-  inset: 0 0 0 46px;
-}
-.cta-nav .cta-label {
-  padding: 12px 20px;
-  font-size: .875rem;
-}
-.cta-nav .cta-icon {
-  width: 46px;
-}
+/* 2. CTA navbar — ver bloque "CTA NAV — forzado con alta especificidad" al final */
 
 /* 3. ViiwLink — logo, layout, mockup */
 .sk-viiwlink-logo-img {
@@ -6083,33 +6072,7 @@ section[id] {
   width: 100% !important;
 }
 
-.sk-viiwlink-window {
-  width: min(100%, 860px) !important;
-  margin: 0 !important;
-}
-
-.sk-viiwlink-content {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 160px;
-  min-height: 460px;
-}
-
-.sk-vl-main-video {
-  height: 460px;
-  overflow: hidden;
-  position: relative;
-  flex: none;
-}
-
-.sk-vl-main-video video,
-.sk-vl-presenter-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
+/* ViiwLink window + content grid — ver bloque "VIIWLINK MOCKUP COMPACTO" al final */
 
 /* 4. Controles — centrados */
 .sk-vl-controls-bar {
