@@ -6592,3 +6592,106 @@ section[id] {
     font-size: 1.75rem;
   }
 }
+
+/* ===== COMPARATIVA MICROINTERACCIONES ===== */
+
+/* 1. Reveal al hacer scroll — estado inicial */
+.sk-cmp-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.sk-cmp-item.cmp-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. Float card — respiración sutil en columna hero */
+@keyframes floatCard {
+  0%   { transform: translateY(-12px); }
+  50%  { transform: translateY(-16px); }
+  100% { transform: translateY(-12px); }
+}
+
+.sk-cmp-col--hero {
+  animation: floatCard 12s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .sk-cmp-col--hero {
+    animation: none;
+  }
+}
+
+/* 3. Check appear — escala con pequeño rebote */
+@keyframes checkIn {
+  0%   { opacity: 0; transform: scale(.7); }
+  70%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.sk-cmp-check {
+  opacity: 0;
+}
+
+.cmp-visible .sk-cmp-check {
+  animation: checkIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
+/* 4. Hover por fila — conexión problema/solución */
+/* Grupo de fila: necesita data-row en HTML para sincronizar columnas */
+.sk-cmp-item--area {
+  transition: opacity .45s ease, transform .45s ease,
+              background .2s ease;
+}
+
+.sk-cmp-item--hero {
+  transition: opacity .45s ease, transform .45s ease,
+              background .2s ease, box-shadow .2s ease;
+}
+
+.sk-cmp-item--pain {
+  transition: opacity .45s ease, transform .45s ease,
+              opacity .2s ease;
+}
+
+/* Hover en fila de área: ilumina icono */
+.sk-cmp-item--area:hover .sk-cmp-icon {
+  background: rgba(9,103,242,.22);
+  color: #93c5fd;
+  transition: background .2s ease, color .2s ease;
+}
+
+/* Hover en fila hero: brillo leve */
+.sk-cmp-item--hero:hover {
+  background: rgba(255,255,255,.06);
+  box-shadow: inset 0 0 0 1px rgba(9,103,242,.18);
+}
+
+.sk-cmp-item--hero:hover .sk-cmp-check {
+  filter: drop-shadow(0 0 4px rgba(74,222,128,.5));
+}
+
+/* Hover row sync: cuando se hace hover en un grupo de filas,
+   la columna pain pierde presencia */
+.sk-cmp-cols:has(.sk-cmp-item--area:hover) .sk-cmp-item--pain,
+.sk-cmp-cols:has(.sk-cmp-item--hero:hover) .sk-cmp-item--pain {
+  opacity: .4;
+}
+
+/* Pero solo la fila correspondiente pierde opacidad — via nth-child */
+.sk-cmp-col--area .sk-cmp-item--area:nth-child(2):hover ~ *,
+.sk-cmp-col--hero .sk-cmp-item--hero:nth-child(2):hover ~ * {
+  /* placeholder: el sync real se hace via JS */
+}
+
+/* Fila pain activa cuando su area o hero tiene hover: fade out */
+.sk-cmp-item--pain.cmp-row-dimmed {
+  opacity: .35;
+  transition: opacity .2s ease;
+}
+
+.sk-cmp-item--pain.cmp-row-highlight {
+  opacity: 1;
+}

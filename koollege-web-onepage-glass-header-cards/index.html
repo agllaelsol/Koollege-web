@@ -640,5 +640,66 @@
   </footer>
 
   <script src="assets/js/main.js?v=20260623-precision-polish"></script>
+  <script>
+  /* ===== COMPARATIVA MICROINTERACCIONES ===== */
+  (function () {
+    // 1. Reveal escalonado por fila con IntersectionObserver
+    var items = document.querySelectorAll('.sk-cmp-item');
+    if (!items.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var delay = parseInt(el.dataset.cmpDelay || '0', 10);
+        setTimeout(function () {
+          el.classList.add('cmp-visible');
+        }, delay);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.15 });
+
+    // Asignar delay escalonado por grupo de filas (mismo índice en cada columna)
+    var cols = document.querySelectorAll('.sk-cmp-col');
+    cols.forEach(function (col) {
+      var colItems = col.querySelectorAll('.sk-cmp-item');
+      colItems.forEach(function (item, i) {
+        item.dataset.cmpDelay = i * 80;
+        observer.observe(item);
+      });
+    });
+
+    // 2. Hover sync — dimea la fila pain correspondiente
+    var areaCols  = document.querySelectorAll('.sk-cmp-col--area  .sk-cmp-item');
+    var heroCols  = document.querySelectorAll('.sk-cmp-col--hero  .sk-cmp-item');
+    var painCols  = document.querySelectorAll('.sk-cmp-col--pain  .sk-cmp-item');
+
+    function dimPainRows(activeIdx) {
+      painCols.forEach(function (el, i) {
+        if (i === activeIdx) {
+          el.classList.remove('cmp-row-dimmed');
+        } else {
+          el.classList.add('cmp-row-dimmed');
+        }
+      });
+    }
+
+    function clearDim() {
+      painCols.forEach(function (el) {
+        el.classList.remove('cmp-row-dimmed');
+      });
+    }
+
+    function bindRow(els) {
+      els.forEach(function (el, i) {
+        el.addEventListener('mouseenter', function () { dimPainRows(i); });
+        el.addEventListener('mouseleave', clearDim);
+      });
+    }
+
+    bindRow(areaCols);
+    bindRow(heroCols);
+  })();
+  </script>
 </body>
 </html>
