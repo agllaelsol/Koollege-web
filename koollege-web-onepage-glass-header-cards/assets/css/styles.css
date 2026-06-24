@@ -4575,11 +4575,11 @@ section[id] {
 }
 
 .sk-viiwlink-copy h2 {
-  max-width: 500px;
+  max-width: 460px;
   margin: 0 0 18px;
   color: var(--navy);
-  font-size: clamp(1.9rem, 3vw, 2.9rem);
-  line-height: 1.1;
+  font-size: clamp(2.8rem, 4vw, 4.4rem);
+  line-height: 1.05;
   text-wrap: balance;
 }
 
@@ -4594,6 +4594,7 @@ section[id] {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+  max-width: 460px;
 }
 
 .sk-vf-card {
@@ -6061,14 +6062,25 @@ section[id] {
 }
 
 .sk-viiwlink-inner {
-  grid-template-columns: 38fr 62fr;
-  gap: 48px;
-  align-items: start;
+  grid-template-columns: 38% 62% !important;
+  gap: 56px !important;
+  align-items: center !important;
+  min-height: auto !important;
+}
+
+.sk-viiwlink-copy {
+  align-self: center !important;
+}
+
+.sk-viiwlink-mockup {
+  align-self: center !important;
+  justify-self: end !important;
+  width: 100% !important;
 }
 
 .sk-viiwlink-window {
-  width: min(100%, 900px);
-  margin: 0;
+  width: min(100%, 860px) !important;
+  margin: 0 !important;
 }
 
 .sk-viiwlink-content {
