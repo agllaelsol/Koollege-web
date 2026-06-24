@@ -5668,3 +5668,334 @@ section[id] {
     0 0 0 4px rgba(255,255,255,.95),
     0 0 0 6px var(--module);
 }
+
+/* ===== ViiwLink mockup — replica referencia real ===== */
+
+/* Topbar: logo + self preview */
+.sk-viiwlink-topbar {
+  position: relative;
+}
+
+.sk-vl-self-preview {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sk-vl-self-video {
+  width: 28px;
+  height: 20px;
+  border-radius: 3px;
+  background: #2a2a35;
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+.sk-vl-self-preview span {
+  font-size: .58rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* Layout: 3 columnas + barra inferior */
+.sk-viiwlink-content {
+  display: grid;
+  grid-template-columns: 192px 1fr 150px;
+  min-height: 340px;
+  background: #1c1c1e;
+}
+
+/* Columna izquierda: chat negro */
+.sk-vl-sidebar {
+  background: #1c1c1e;
+  border-right: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 0;
+}
+
+.sk-vl-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sk-vl-chat-header strong {
+  color: #fff;
+  font-size: .82rem;
+}
+
+.sk-vl-chat-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sk-vl-chat-tab {
+  flex: 1;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,.35);
+}
+
+.sk-vl-chat-tab.active {
+  border-bottom-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.sk-vl-chat-body {
+  flex: 1;
+  min-height: 60px;
+}
+
+.sk-vl-chat-footer {
+  padding: 8px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.sk-vl-everyone-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  margin-bottom: 6px;
+  color: rgba(255,255,255,.55);
+  font-size: .7rem;
+}
+
+.sk-vl-chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.sk-vl-placeholder {
+  flex: 1;
+  color: rgba(255,255,255,.28);
+  font-size: .7rem;
+}
+
+.sk-vl-send-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.35);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Centro: tile del presentador */
+.sk-vl-main {
+  background: #141414;
+  display: flex;
+  align-items: stretch;
+}
+
+.sk-vl-main-video {
+  flex: 1;
+  display: flex;
+}
+
+.sk-vl-presenter-tile {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #1a2840 0%, #0e1520 100%);
+  min-height: 260px;
+}
+
+.sk-vl-presenter-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(59,130,246,.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(16,185,129,.05) 0%, transparent 50%);
+}
+
+.sk-vl-presenter-silhouette {
+  position: relative;
+  z-index: 1;
+  opacity: .55;
+}
+
+.sk-vl-presenter-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: .66rem;
+}
+
+/* Columna derecha: video tiles verticales */
+.sk-vl-participants-panel {
+  background: #1c1c1e;
+  border-left: 1px solid rgba(255,255,255,.06);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.sk-vl-vtile {
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sk-vl-vtile-video {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sk-vl-vtile-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px 4px;
+  background: rgba(0,0,0,.45);
+}
+
+.sk-vl-vtile-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3ecf4c;
+  flex-shrink: 0;
+}
+
+.sk-vl-vtile-status.sk-vl-muted {
+  background: #888;
+}
+
+.sk-vl-vtile-name {
+  flex: 1;
+  color: #fff;
+  font-size: .62rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bottom control bar */
+.sk-vl-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #2a2a2e;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.sk-vl-ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sk-vl-ctrl-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 7px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.75);
+  cursor: pointer;
+  font-size: .6rem;
+  transition: background .15s;
+}
+
+.sk-vl-ctrl-btn:hover {
+  background: rgba(255,255,255,.12);
+}
+
+.sk-vl-ctrl-btn.sk-vl-ctrl-active {
+  color: #fff;
+}
+
+.sk-vl-ctrl-caret {
+  font-size: .5rem;
+  opacity: .5;
+  line-height: 1;
+}
+
+.sk-vl-ctrl-badge::after {
+  content: attr(data-count);
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  font-size: .5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sk-vl-ctrl-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: #e02020;
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.sk-vl-ctrl-end:hover {
+  background: #c01818;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr 130px;
+  }
+  .sk-vl-sidebar { display: none; }
+}
+
+@media (max-width: 600px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr;
+  }
+  .sk-vl-participants-panel { display: none; }
+  .sk-vl-controls-bar { padding: 6px 8px; gap: 3px; }
+  .sk-vl-ctrl-btn { padding: 5px 6px; }
+}
