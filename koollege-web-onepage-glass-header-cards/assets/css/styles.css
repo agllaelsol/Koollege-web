@@ -73,19 +73,19 @@ textarea {
 }
 
 section[id] {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 80px;
 }
 
 .site-header {
   position: fixed;
   z-index: 900;
-  top: 24px;
-  left: 50%;
-  width: min(calc(100% - 64px), 1020px);
-  transform: translateX(-50%);
-  border-radius: 0 0 28px 28px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: none;
+  border-radius: 0;
   background: rgba(255, 255, 255, .92);
-  box-shadow: 0 26px 80px rgba(23, 58, 91, .14);
+  box-shadow: 0 1px 0 rgba(23,58,91,.08), 0 8px 32px rgba(23, 58, 91, .10);
   backdrop-filter: blur(18px);
 }
 
@@ -94,7 +94,8 @@ section[id] {
   min-height: 66px;
   align-items: center;
   gap: 22px;
-  padding: 0 14px 0 22px;
+  padding: 0 clamp(20px, 4vw, 64px);
+  max-width: none;
 }
 
 .brand {
@@ -1741,10 +1742,6 @@ section[id] {
 }
 
 @media (max-width: 1180px) {
-  .site-header {
-    width: calc(100% - 28px);
-  }
-
   .nav {
     gap: 16px;
   }
@@ -1773,11 +1770,6 @@ section[id] {
 }
 
 @media (max-width: 940px) {
-  .site-header {
-    top: 12px;
-    border-radius: 20px;
-  }
-
   .nav {
     min-height: 62px;
   }
@@ -2224,9 +2216,6 @@ section[id] {
 }
 
 /* Final visual pass: BG-KOO hero, admin mockup, cleaner alignment */
-.site-header {
-  top: 0;
-}
 
 .site-footer {
   margin: 0;
@@ -2593,10 +2582,6 @@ section[id] {
 }
 
 @media (max-width: 620px) {
-  .site-header {
-    width: 100%;
-    border-radius: 0 0 20px 20px;
-  }
 
   .sk-admin-module-grid {
     grid-template-columns: 1fr;
