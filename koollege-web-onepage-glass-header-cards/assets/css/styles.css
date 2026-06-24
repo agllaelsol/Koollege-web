@@ -139,7 +139,7 @@ section[id] {
   grid-area: right;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   white-space: nowrap;
 }
 
@@ -6858,21 +6858,22 @@ button.nav-login {
 
 .login-menu {
   position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  min-width: 280px;
+  /* Align to left edge of the login button, open downward */
+  top: calc(100% + 12px);
+  left: 0;
+  right: auto;
+  min-width: 520px;
   background: #fff;
-  border: 1px solid rgba(17,31,52,.1);
-  border-radius: 16px;
+  border: 1px solid rgba(17,31,52,.09);
+  border-radius: 20px;
   box-shadow:
-    0 4px 6px -1px rgba(0,0,0,.07),
-    0 20px 48px -8px rgba(17,31,52,.18),
-    0 0 0 1px rgba(255,255,255,.8);
-  padding: 8px;
+    0 4px 6px -1px rgba(0,0,0,.06),
+    0 24px 56px -8px rgba(17,31,52,.20),
+    0 0 0 1px rgba(255,255,255,.7);
+  padding: 10px;
   z-index: 9999;
-  /* Animación de apertura */
-  transform-origin: top right;
-  animation: loginMenuIn .18s cubic-bezier(.22,1,.36,1) forwards;
+  transform-origin: top left;
+  animation: loginMenuIn .2s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 @keyframes loginMenuIn {
@@ -6887,43 +6888,46 @@ button.nav-login {
 .login-menu__item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  gap: 16px;
+  padding: 18px 20px;
+  min-height: 76px;
+  border-radius: 12px;
   text-decoration: none;
   color: #0f1e33;
-  transition: background .15s ease;
+  transition: background .18s ease;
   outline-offset: 2px;
 }
 
 .login-menu__item:hover,
 .login-menu__item:focus-visible {
-  background: #f0f5ff;
+  background: #f5f8ff;
 }
 
 .login-menu__item:focus-visible {
   outline: 2px solid #0967f2;
 }
 
-/* Separa los dos items con un divisor sutil */
+/* Subtle divider between items */
 .login-menu__item + .login-menu__item {
-  border-top: 1px solid rgba(17,31,52,.06);
-  border-radius: 0 0 10px 10px;
-}
-.login-menu__item:first-child {
-  border-radius: 10px 10px 0 0;
+  border-top: 1px solid rgba(17,31,52,.055);
 }
 
 .login-menu__icon {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
-  background: #f0f5ff;
+  border-radius: 14px;
+  background: #eef3ff;
   color: #0967f2;
+  transition: background .18s ease;
+}
+
+.login-menu__icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .login-menu__item:hover .login-menu__icon {
@@ -6934,31 +6938,35 @@ button.nav-login {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .login-menu__text strong {
-  font-size: .875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   color: #0f1e33;
   line-height: 1.2;
 }
 
 .login-menu__text small {
-  font-size: .72rem;
+  font-size: .8rem;
   color: #64748b;
   font-weight: 400;
+  font-family: monospace;
+  letter-spacing: -.01em;
 }
 
 .login-menu__arrow {
   flex-shrink: 0;
-  color: #94a3b8;
-  transition: color .15s ease, transform .15s ease;
+  width: 18px;
+  height: 18px;
+  color: #b0bac8;
+  transition: color .18s ease, transform .18s ease;
 }
 
 .login-menu__item:hover .login-menu__arrow {
   color: #0967f2;
-  transform: translate(2px, -2px);
+  transform: translate(3px, -3px);
 }
 
 /* Mobile: dropdown dentro del menú hamburguesa */
@@ -6977,11 +6985,28 @@ button.nav-login {
     position: static;
     box-shadow: none;
     border: 1px solid rgba(17,31,52,.08);
-    border-radius: 12px;
-    margin-top: 4px;
+    border-radius: 14px;
+    margin-top: 6px;
     min-width: 0;
     width: 100%;
     animation: none;
+    padding: 6px;
+  }
+
+  .login-menu__item {
+    padding: 14px 16px;
+    min-height: 64px;
+    gap: 14px;
+  }
+
+  .login-menu__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .login-menu__text strong {
+    font-size: .9rem;
   }
 }
 
