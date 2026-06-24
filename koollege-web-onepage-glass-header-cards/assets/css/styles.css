@@ -90,15 +90,18 @@ section[id] {
 }
 
 .nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "brand center right";
   min-height: 66px;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
   padding: 0 clamp(20px, 4vw, 64px);
   max-width: none;
 }
 
 .brand {
+  grid-area: brand;
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -111,15 +114,32 @@ section[id] {
   object-position: left center;
 }
 
+/* nav-links is a transparent passthrough on desktop */
 .nav-links {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 20px;
-  min-width: 0;
+  display: contents;
   color: #657289;
   font-size: .9rem;
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-center {
+  grid-area: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #657289;
+  font-size: .9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-right {
+  grid-area: right;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   white-space: nowrap;
 }
 
@@ -1801,8 +1821,8 @@ section[id] {
     width: 118px;
   }
 
-  .nav-links {
-    gap: 13px;
+  .nav-center {
+    gap: 6px;
     font-size: .82rem;
   }
 
@@ -1830,26 +1850,45 @@ section[id] {
     margin-left: auto;
   }
 
+  /* On mobile, .nav becomes a simple flex row (brand + hamburger) */
+  .nav {
+    display: flex;
+    grid-template-columns: none;
+    grid-template-areas: none;
+  }
+
+  /* Mobile dropdown panel */
   .nav-links {
+    display: none;
     position: fixed;
     top: 78px;
     left: 14px;
     right: 14px;
-    display: none;
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 20px;
     background: rgba(255,255,255,.98);
     box-shadow: var(--shadow);
+    /* reset display:contents from desktop */
+    color: #657289;
+    font-size: .9rem;
+    font-weight: 500;
+    white-space: nowrap;
   }
 
   .nav-open .nav-links {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
   }
 
-  .nav-links a:not(.nav-cta) {
+  .nav-center,
+  .nav-right {
+    display: contents;
+  }
+
+  .nav-links a:not(.nav-cta),
+  .nav-links .nav-login {
     min-height: 44px;
     padding: 0 10px;
   }
@@ -7024,5 +7063,170 @@ button.nav-login {
     width: 100%;
     text-align: center;
     padding: 6px 0;
+  }
+}
+
+/* button.sk-video-button — reset para que <button> se vea igual que <a> */
+button.sk-video-button {
+  background: none;
+  border: 1px solid var(--line);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ===== ITEM 1: "Cómo funciona" — section head centrado con contraste ===== */
+
+#como-funciona .sk-section-head span {
+  color: #60a5fa;         /* azul más claro — legible sobre fondo oscuro */
+}
+
+#como-funciona .sk-section-head h2 {
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0,0,0,.25);
+}
+
+/* ===== ITEM 2: Step cards — imagen siempre visible (no solo en hover) ===== */
+
+/* La imagen ya está en el HTML. El ::before overlay que estaba
+   invisible (opacity 0) pone la imagen de fondo en hover.
+   La imagen <picture> real dentro de .step-front SÍ se muestra siempre. */
+
+.sk-steps .step-front {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sk-steps .step-front picture {
+  display: block;
+  width: calc(100% + 60px);   /* sangra fuera del padding del card */
+  margin: -30px -30px 20px;   /* cubre los bordes redondeados del card */
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sk-steps .step-front picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ===== ITEM 5: CTA en Comparativa ===== */
+
+.sk-cmp-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.sk-cmp-cta-label {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(255,255,255,.55);
+  text-align: center;
+}
+
+/* ===== ITEM 4: ViiwLink layout — alineación vertical central ===== */
+
+.sk-viiwlink-section {
+  display: flex;
+  align-items: stretch;
+}
+
+.sk-viiwlink-inner {
+  align-items: center !important;
+}
+
+/* ===== ITEM 6: Video tour modal ===== */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.video-modal[hidden] {
+  display: none;
+}
+
+.video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 9, 30, .82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.video-modal__box {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.1),
+    0 40px 80px rgba(0,0,0,.6);
+  animation: videoModalIn .3s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+@keyframes videoModalIn {
+  from { opacity: 0; transform: scale(.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)  translateY(0);     }
+}
+
+.video-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,.5);
+  color: rgba(255,255,255,.85);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.video-modal__close:hover {
+  background: rgba(0,0,0,.8);
+  color: #fff;
+}
+
+.video-modal__frame {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.video-modal__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 480px) {
+  .video-modal {
+    padding: 12px;
+  }
+  .video-modal__box {
+    border-radius: 14px;
   }
 }

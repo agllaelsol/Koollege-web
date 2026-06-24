@@ -187,24 +187,68 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
   });
 });
 
+// ===== VIDEO TOUR MODAL =====
+(function () {
+  var VIDEO_URL = 'https://www.youtube.com/embed/iqzF2NVJtYE?autoplay=1&rel=0&modestbranding=1';
+  var FALLBACK_URL = 'https://www.youtube.com/watch?v=iqzF2NVJtYE';
+
+  var btn     = document.getElementById('video-tour-btn');
+  var modal   = document.getElementById('video-modal');
+  var backdrop = document.getElementById('video-modal-backdrop');
+  var closeBtn = document.getElementById('video-modal-close');
+  var iframe  = document.getElementById('video-modal-iframe');
+
+  if (!btn || !modal) return;
+
+  function openModal() {
+    try {
+      iframe.src = VIDEO_URL;
+      modal.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    } catch (e) {
+      window.open(FALLBACK_URL, '_blank', 'noopener,noreferrer');
+    }
+  }
+
+  function closeModal() {
+    modal.setAttribute('hidden', '');
+    iframe.src = '';          // detiene la reproducción
+    document.body.style.overflow = '';
+    btn.focus();
+  }
+
+  btn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
+  });
+})();
+
 // ===== COOKIE CONSENT =====
 (function () {
   var STORAGE_KEY = 'koo_cookie_consent';
+  // DEMO MODE: cambiar a false en producción para guardar la decisión
+  var DEMO_MODE = true;
   var banner = document.getElementById('cookie-banner');
   if (!banner) return;
 
-  // Si ya hay decisión guardada, no mostrar
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  // En modo demo siempre muestra el banner (sin leer localStorage)
+  if (!DEMO_MODE && localStorage.getItem(STORAGE_KEY)) return;
 
   // Mostrar con pequeño delay para no competir con la animación de página
   setTimeout(function () { banner.removeAttribute('hidden'); }, 800);
 
   function dismiss(choice) {
-    // choice: 'all' | 'required' | 'pending'
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      decision: choice,
-      timestamp: new Date().toISOString()
-    }));
+    // En producción (DEMO_MODE = false) guarda la decisión
+    if (!DEMO_MODE) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        decision: choice,
+        timestamp: new Date().toISOString()
+      }));
+    }
     banner.style.animation = 'none';
     banner.style.transition = 'opacity .25s ease, transform .25s ease';
     banner.style.opacity = '0';
