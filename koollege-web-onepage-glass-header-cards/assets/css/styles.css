@@ -90,15 +90,18 @@ section[id] {
 }
 
 .nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "brand center right";
   min-height: 66px;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
   padding: 0 clamp(20px, 4vw, 64px);
   max-width: none;
 }
 
 .brand {
+  grid-area: brand;
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -111,15 +114,32 @@ section[id] {
   object-position: left center;
 }
 
+/* nav-links is a transparent passthrough on desktop */
 .nav-links {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 20px;
-  min-width: 0;
+  display: contents;
   color: #657289;
   font-size: .9rem;
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-center {
+  grid-area: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #657289;
+  font-size: .9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-right {
+  grid-area: right;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   white-space: nowrap;
 }
 
@@ -1801,8 +1821,8 @@ section[id] {
     width: 118px;
   }
 
-  .nav-links {
-    gap: 13px;
+  .nav-center {
+    gap: 6px;
     font-size: .82rem;
   }
 
@@ -1830,26 +1850,45 @@ section[id] {
     margin-left: auto;
   }
 
+  /* On mobile, .nav becomes a simple flex row (brand + hamburger) */
+  .nav {
+    display: flex;
+    grid-template-columns: none;
+    grid-template-areas: none;
+  }
+
+  /* Mobile dropdown panel */
   .nav-links {
+    display: none;
     position: fixed;
     top: 78px;
     left: 14px;
     right: 14px;
-    display: none;
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 20px;
     background: rgba(255,255,255,.98);
     box-shadow: var(--shadow);
+    /* reset display:contents from desktop */
+    color: #657289;
+    font-size: .9rem;
+    font-weight: 500;
+    white-space: nowrap;
   }
 
   .nav-open .nav-links {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
   }
 
-  .nav-links a:not(.nav-cta) {
+  .nav-center,
+  .nav-right {
+    display: contents;
+  }
+
+  .nav-links a:not(.nav-cta),
+  .nav-links .nav-login {
     min-height: 44px;
     padding: 0 10px;
   }
