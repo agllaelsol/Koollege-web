@@ -6032,7 +6032,7 @@ section[id] {
 /* 3. Video central — cubrir sin recorte feo */
 .sk-vl-presenter-video {
   object-fit: cover !important;
-  object-position: center center !important;
+  object-position: center top !important;
 }
 .sk-vl-presenter-tile {
   min-height: 320px !important;
@@ -6100,7 +6100,7 @@ section[id] {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center center !important;
+  object-position: center top !important;
 }
 
 /* Label del presentador sobre el video */
@@ -6227,5 +6227,99 @@ section[id] {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center center !important;
+  object-position: center top !important;
+}
+
+/* ===== v20260624-FINAL2 ===== */
+
+/* CTA navbar: idéntico al hero, mismo componente */
+.cta-nav {
+  min-height: 46px !important;
+  height: auto !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border-radius: 14px !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.2) !important;
+}
+.cta-nav .cta-bg {
+  position: absolute !important;
+  inset: 0 0 0 46px !important;
+  background: #0967f2 !important;
+  border-radius: 14px !important;
+  z-index: 0 !important;
+}
+.cta-nav .cta-label {
+  position: relative !important;
+  z-index: 1 !important;
+  padding: 12px 20px !important;
+  font-size: .875rem !important;
+  font-weight: 700 !important;
+  background: #173a5b !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+  white-space: nowrap !important;
+}
+.cta-nav .cta-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  background: transparent !important;
+  flex-shrink: 0 !important;
+}
+.cta-nav .cta-icon svg { stroke: #fff !important; }
+
+/* Logo ViiwLink: 200px */
+.sk-viiwlink-logo-img {
+  width: 200px !important;
+  height: auto !important;
+  max-width: none !important;
+  display: block !important;
+  margin-bottom: 24px !important;
+}
+
+/* Layout ViiwLink: 38% texto / 62% mockup */
+.sk-viiwlink-inner {
+  grid-template-columns: 38fr 62fr !important;
+  gap: 48px !important;
+  align-items: start !important;
+}
+
+/* Mockup max 900px, video sin cortar cabeza */
+.sk-viiwlink-window {
+  width: min(100%, 900px) !important;
+  margin: 0 !important;
+}
+
+.sk-viiwlink-content {
+  grid-template-columns: 200px minmax(400px, 1fr) 160px !important;
+  min-height: 460px !important;
+}
+
+.sk-vl-main-video {
+  height: 460px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Rectángulo negro esquina superior derecha — eliminado en HTML y CSS */
+.sk-vl-self-preview { display: none !important; }
+
+@media (max-width: 960px) {
+  .sk-viiwlink-inner { grid-template-columns: 1fr !important; }
+  .sk-viiwlink-window { width: 100% !important; }
+  .sk-viiwlink-content { grid-template-columns: 1fr 140px !important; }
+  .sk-vl-main-video { height: 340px !important; }
+}
+@media (max-width: 600px) {
+  .sk-viiwlink-content { grid-template-columns: 1fr !important; }
+  .sk-vl-participants-panel { display: none !important; }
+  .sk-vl-main-video { height: 260px !important; }
 }
