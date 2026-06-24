@@ -2236,6 +2236,11 @@ section[id] {
 .sk-hero {
   background:
     linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.6) 35%, rgba(244,245,243,.96) 82%),
+    url("../img/bg-koo.webp") center top / cover no-repeat;
+}
+.no-webp .sk-hero {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.6) 35%, rgba(244,245,243,.96) 82%),
     url("../img/bg-koo.png") center top / cover no-repeat;
 }
 
@@ -2608,6 +2613,11 @@ section[id] {
 
 /* One-page polish: tech hero, white arrows, centered plans and flip steps */
 .sk-hero {
+  background:
+    linear-gradient(180deg, rgba(4, 9, 42, .54) 0%, rgba(7, 15, 51, .62) 42%, rgba(244,245,243,.96) 90%),
+    url("../img/tech-header.webp") center top / cover no-repeat;
+}
+.no-webp .sk-hero {
   background:
     linear-gradient(180deg, rgba(4, 9, 42, .54) 0%, rgba(7, 15, 51, .62) 42%, rgba(244,245,243,.96) 90%),
     url("../img/tech-header.jpg") center top / cover no-repeat;
@@ -4457,8 +4467,18 @@ section[id] {
       rgba(15,25,60,.95) 40%,
       rgba(7,12,30,1) 100%
     ),
-    url("../img/bg-koo.png") center top / cover no-repeat;
+    url("../img/bg-koo.webp") center top / cover no-repeat;
   position: relative;
+}
+.no-webp .sk-hero {
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(40,80,180,.35) 0%,
+      rgba(15,25,60,.95) 40%,
+      rgba(7,12,30,1) 100%
+    ),
+    url("../img/bg-koo.png") center top / cover no-repeat;
 }
 
 .sk-hero::before {
@@ -6694,4 +6714,32 @@ section[id] {
 
 .sk-cmp-item--pain.cmp-row-highlight {
   opacity: 1;
+}
+
+/* ===== FORM STATUS MESSAGES ===== */
+.form-status {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: .875rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.form-status--success {
+  background: rgba(74,222,128,.12);
+  border: 1px solid rgba(74,222,128,.3);
+  color: #16a34a;
+}
+
+.form-status--error {
+  background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.25);
+  color: #dc2626;
+}
+
+.form-field-error {
+  display: block;
+  font-size: .78rem;
+  color: #dc2626;
+  margin-top: 4px;
 }

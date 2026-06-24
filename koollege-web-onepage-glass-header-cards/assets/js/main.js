@@ -186,3 +186,92 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
     rail.style.animationPlayState = "running";
   });
 });
+
+// ===== VIDEO LAZY LOAD =====
+// Los videos usan data-src; solo se cargan cuando el mockup entra al viewport.
+const lazyVideos = [...document.querySelectorAll("video[data-src]")];
+if (lazyVideos.length) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const vid = entry.target;
+      vid.src = vid.dataset.src;
+      vid.removeAttribute("data-src");
+      vid.play().catch(() => {});
+      videoObserver.unobserve(vid);
+    });
+  }, { rootMargin: "200px" });
+  lazyVideos.forEach((v) => videoObserver.observe(v));
+}
+
+// ===== IMG ONERROR (sin inline handlers) =====
+document.querySelectorAll("img.sk-viiwlink-logo-img, img.sk-vl-topbar-logo").forEach((img) => {
+  img.addEventListener("error", () => { img.style.display = "none"; });
+});
+
+// ===== FORMULARIO DE DEMO =====
+const demoForm = document.getElementById("demo-form");
+const formStatus = document.getElementById("form-status");
+const formSubmitBtn = document.getElementById("form-submit-btn");
+
+if (demoForm) {
+  demoForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Honeypot check (cliente)
+    if (demoForm.website && demoForm.website.value) return;
+
+    // Validación básica
+    const email = demoForm.email.value.trim();
+    const emailErr = document.getElementById("email-err");
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!emailOk) {
+      emailErr.textContent = "Ingresa un correo válido.";
+      emailErr.removeAttribute("hidden");
+      demoForm.email.setAttribute("aria-invalid", "true");
+      demoForm.email.focus();
+      return;
+    }
+    emailErr.setAttribute("hidden", "");
+    demoForm.email.removeAttribute("aria-invalid");
+
+    const message = demoForm.message ? demoForm.message.value : "";
+    if (message.length > 1000) {
+      showFormStatus("El mensaje no puede superar 1,000 caracteres.", "error");
+      return;
+    }
+
+    // UI de carga
+    formSubmitBtn.disabled = true;
+    formSubmitBtn.textContent = "Enviando…";
+    showFormStatus("", null);
+
+    try {
+      const res = await fetch("send.php", {
+        method: "POST",
+        body: new FormData(demoForm),
+        headers: { "Accept": "application/json" }
+      });
+      if (res.ok) {
+        showFormStatus("¡Listo! Te contactaremos en menos de 24 horas para confirmar tu demo.", "success");
+        demoForm.reset();
+      } else {
+        const text = await res.text().catch(() => "");
+        showFormStatus(text || "Ocurrió un error. Intenta de nuevo.", "error");
+      }
+    } catch {
+      showFormStatus("No se pudo enviar. Revisa tu conexión e intenta de nuevo.", "error");
+    } finally {
+      formSubmitBtn.disabled = false;
+      formSubmitBtn.textContent = "Agendar demo";
+    }
+  });
+}
+
+function showFormStatus(msg, type) {
+  if (!formStatus) return;
+  if (!msg) { formStatus.setAttribute("hidden", ""); return; }
+  formStatus.textContent = msg;
+  formStatus.className = "form-status form-status--" + type;
+  formStatus.removeAttribute("hidden");
+}

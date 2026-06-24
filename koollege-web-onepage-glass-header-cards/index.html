@@ -8,7 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260623-v6-viiwlink">
+  <link rel="preload" as="image" href="assets/img/bg-koo.webp" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260624-perf">
+  <script>
+    // WebP detection — agrega .no-webp al <html> si el navegador no soporta WebP
+    (function(){var i=new Image();i.onload=i.onerror=function(){if(i.height!==1)document.documentElement.classList.add('no-webp');};i.src='data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAkA4JYgCdAEO/gHOAAA=';})();
+  </script>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -109,10 +114,13 @@
           <h2>Todo lo que necesita tu colegio, sin dispersar la operación.</h2>
         </div>
         <div class="sk-steps">
-          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-1.png')">
+          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-1.webp')">
               <div class="step-card-inner">
                 <div class="step-face step-front">
-                  <img src="assets/img/steps/step-1.png" alt="Equipo escolar iniciando la implementación de Koollege">
+                  <picture>
+                    <source srcset="assets/img/steps/step-1.webp" type="image/webp">
+                    <img src="assets/img/steps/step-1.png" alt="Equipo escolar iniciando la implementación de Koollege" loading="lazy">
+                  </picture>
                   <b>1</b><span>Implementación</span><h3>Tu operación lista en semanas, no en meses</h3>
                 </div>
               <div class="step-face step-back">
@@ -120,10 +128,13 @@
               </div>
             </div>
           </article>
-          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-2.png')">
+          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-2.webp')">
               <div class="step-card-inner">
                 <div class="step-face step-front">
-                  <img src="assets/img/steps/step-2.png" alt="Calendario escolar digital organizado en la plataforma">
+                  <picture>
+                    <source srcset="assets/img/steps/step-2.webp" type="image/webp">
+                    <img src="assets/img/steps/step-2.png" alt="Calendario escolar digital organizado en la plataforma" loading="lazy">
+                  </picture>
                   <b>2</b><span>Operación diaria</span><h3>Tu equipo trabaja sin pedir permiso a nadie</h3>
                 </div>
               <div class="step-face step-back">
@@ -131,10 +142,13 @@
               </div>
             </div>
           </article>
-          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-3.png')">
+          <article class="reveal sk-step-card" style="--step-image:url('assets/img/steps/step-3.webp')">
               <div class="step-card-inner">
                 <div class="step-face step-front">
-                  <img src="assets/img/steps/step-3.png" alt="Planificación escolar con calendario y tareas organizadas">
+                  <picture>
+                    <source srcset="assets/img/steps/step-3.webp" type="image/webp">
+                    <img src="assets/img/steps/step-3.png" alt="Planificación escolar con calendario y tareas organizadas" loading="lazy">
+                  </picture>
                   <b>3</b><span>Dirección</span><h3>Cada lunes sabes exactamente qué pasó</h3>
                 </div>
               <div class="step-face step-back">
@@ -149,7 +163,7 @@
     <section class="sk-viiwlink-section" id="interfaces">
       <div class="section-inner sk-viiwlink-inner">
         <div class="sk-viiwlink-copy reveal">
-          <img src="assets/img/viiw_azul_512x512.png" alt="ViiwLink" class="sk-viiwlink-logo-img" onerror="this.style.display='none'">
+          <img src="assets/img/viiw_azul_512x512.png" alt="ViiwLink" class="sk-viiwlink-logo-img">
           <span class="sk-viiwlink-eyebrow">ViiwLink</span>
           <h2>Educación en línea y reuniones digitales en una sola plataforma</h2>
           <p>Tecnología avanzada para conectar alumnos, maestros y equipos desde cualquier lugar.</p>
@@ -190,7 +204,7 @@
             <!-- Browser chrome -->
             <div class="sk-viiwlink-topbar">
               <span></span><span></span><span></span>
-              <img src="assets/img/viiw_azul_512x512.png" alt="ViiwLink" class="sk-vl-topbar-logo" onerror="this.style.display='none'">
+              <img src="assets/img/viiw_azul_512x512.png" alt="ViiwLink" class="sk-vl-topbar-logo">
               <strong>viiwlink.com/sala/matematicas-3b</strong>
             </div>
 
@@ -231,7 +245,7 @@
               <div class="sk-vl-main">
                 <div class="sk-vl-main-video">
                   <div class="sk-vl-presenter-tile">
-                    <video class="sk-vl-presenter-video" src="assets/video/07.mp4" autoplay muted loop playsinline></video>
+                    <video class="sk-vl-presenter-video" data-src="assets/video/07.mp4" preload="none" muted loop playsinline></video>
                     <div class="sk-vl-presenter-label">
                       <svg viewBox="0 0 24 24" fill="#3ecf4c" width="10" height="10"><circle cx="12" cy="12" r="10"/></svg>
                       <span>Prof. Rodríguez</span>
@@ -246,7 +260,7 @@
                 <!-- Tile: Monica G -->
                 <div class="sk-vl-vtile">
                   <div class="sk-vl-vtile-video">
-                    <video src="assets/video/01.mp4" autoplay muted loop playsinline></video>
+                    <video data-src="assets/video/01.mp4" preload="none" muted loop playsinline></video>
                   </div>
                   <div class="sk-vl-vtile-bar">
                     <span class="sk-vl-vtile-status"></span>
@@ -257,7 +271,7 @@
                 <!-- Tile: Martin P -->
                 <div class="sk-vl-vtile">
                   <div class="sk-vl-vtile-video">
-                    <video src="assets/video/04.mp4" autoplay muted loop playsinline></video>
+                    <video data-src="assets/video/04.mp4" preload="none" muted loop playsinline></video>
                   </div>
                   <div class="sk-vl-vtile-bar">
                     <span class="sk-vl-vtile-status"></span>
@@ -268,7 +282,7 @@
                 <!-- Tile: Luis P -->
                 <div class="sk-vl-vtile">
                   <div class="sk-vl-vtile-video">
-                    <video src="assets/video/03.mp4" autoplay muted loop playsinline></video>
+                    <video data-src="assets/video/03.mp4" preload="none" muted loop playsinline></video>
                   </div>
                   <div class="sk-vl-vtile-bar">
                     <span class="sk-vl-vtile-status"></span>
@@ -279,7 +293,7 @@
                 <!-- Tile: Marco R -->
                 <div class="sk-vl-vtile">
                   <div class="sk-vl-vtile-video">
-                    <video src="assets/video/05.mp4" autoplay muted loop playsinline></video>
+                    <video data-src="assets/video/05.mp4" preload="none" muted loop playsinline></video>
                   </div>
                   <div class="sk-vl-vtile-bar">
                     <span class="sk-vl-vtile-status"></span>
@@ -290,7 +304,7 @@
                 <!-- Tile: Ana M -->
                 <div class="sk-vl-vtile">
                   <div class="sk-vl-vtile-video">
-                    <video src="assets/video/06.mp4" autoplay muted loop playsinline></video>
+                    <video data-src="assets/video/06.mp4" preload="none" muted loop playsinline></video>
                   </div>
                   <div class="sk-vl-vtile-bar">
                     <span class="sk-vl-vtile-status"></span>
@@ -610,21 +624,22 @@
         <h2 id="demo-drawer-title">Agenda una sesión con Koollege.</h2>
         <p>Cuéntanos de tu institución y preparamos un recorrido enfocado en administración, alumnos, pagos, reportes o ViiwLink.</p>
       </div>
-      <form class="contact-form demo-drawer__form" action="send.php" method="post">
+      <form class="contact-form demo-drawer__form" id="demo-form" novalidate>
         <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px">
         <div class="form-grid">
-          <div class="field"><label for="drawer-name">Nombre</label><input id="drawer-name" name="name" type="text" autocomplete="name" required></div>
-          <div class="field"><label for="drawer-email">Correo institucional</label><input id="drawer-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="drawer-phone">Teléfono / WhatsApp</label><input id="drawer-phone" name="phone" type="tel" autocomplete="tel" required></div>
-          <div class="field"><label for="drawer-role">Cargo</label><input id="drawer-role" name="role" type="text" placeholder="Dirección, coordinación, administración"></div>
-          <div class="field"><label for="drawer-school">Institución</label><input id="drawer-school" name="school" type="text" required></div>
+          <div class="field"><label for="drawer-name">Nombre</label><input id="drawer-name" name="name" type="text" autocomplete="name" maxlength="120" required aria-required="true"></div>
+          <div class="field"><label for="drawer-email">Correo institucional</label><input id="drawer-email" name="email" type="email" autocomplete="email" maxlength="254" required aria-required="true" aria-describedby="email-err"><span id="email-err" class="form-field-error" role="alert" aria-live="polite" hidden></span></div>
+          <div class="field"><label for="drawer-phone">Teléfono / WhatsApp</label><input id="drawer-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" required aria-required="true"></div>
+          <div class="field"><label for="drawer-role">Cargo</label><input id="drawer-role" name="role" type="text" placeholder="Dirección, coordinación, administración" maxlength="80"></div>
+          <div class="field"><label for="drawer-school">Institución</label><input id="drawer-school" name="school" type="text" maxlength="120" required aria-required="true"></div>
           <div class="field"><label for="drawer-school-size">Tamaño</label><select id="drawer-school-size" name="school_size"><option>Menos de 100 alumnos</option><option>100 a 500 alumnos</option><option>501 a 1,500 alumnos</option><option>Más de 1,500 alumnos</option></select></div>
           <div class="field"><label for="drawer-demo-date">Fecha preferida</label><input id="drawer-demo-date" name="demo_date" type="date"></div>
           <div class="field"><label for="drawer-demo-time">Horario preferido</label><select id="drawer-demo-time" name="demo_time"><option>Mañana</option><option>Mediodía</option><option>Tarde</option></select></div>
         </div>
         <div class="field"><label for="drawer-interest">Módulo principal</label><select id="drawer-interest" name="interest"><option>Plataforma administrativa</option><option>Portal de alumnos</option><option>Pagos y cobranza</option><option>Videoconferencias</option><option>Reportes directivos</option><option>Quiero ver todo el ecosistema</option></select></div>
-        <div class="field"><label for="drawer-message">Qué quieres revisar en la demo</label><textarea id="drawer-message" name="message" placeholder="Ej. inscripciones, pagos, portal de alumnos, reportes..."></textarea></div>
-        <button class="button" type="submit">Agendar demo</button>
+        <div class="field"><label for="drawer-message">Qué quieres revisar en la demo</label><textarea id="drawer-message" name="message" placeholder="Ej. inscripciones, pagos, portal de alumnos, reportes..." maxlength="1000"></textarea></div>
+        <div id="form-status" role="alert" aria-live="polite" hidden></div>
+        <button class="button" type="submit" id="form-submit-btn">Agendar demo</button>
       </form>
     </aside>
   </div>
