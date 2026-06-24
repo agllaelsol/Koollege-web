@@ -6193,3 +6193,43 @@ section[id] {
 .nav-links .cta-button.cta-nav:hover .cta-icon svg {
   transform: rotate(-45deg) !important;
 }
+
+/* ===== VIDEO CENTRAL 520x630 ===== */
+
+.sk-viiwlink-content {
+  min-height: 630px !important;
+  align-items: stretch !important;
+}
+
+.sk-vl-main {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  height: 100% !important;
+}
+
+.sk-vl-main-video {
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  min-height: 630px !important;
+  height: 630px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.sk-vl-main-video video,
+.sk-vl-presenter-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+
+.sk-vl-presenter-tile {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
