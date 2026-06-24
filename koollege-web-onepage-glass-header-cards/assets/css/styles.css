@@ -6416,79 +6416,101 @@ section[id] {
 }
 
 
-/* ===== VIIWLINK MOCKUP COMPACTO ===== */
+/* ===== VIIWLINK MOCKUP — definición única ===== */
 
+/* Ventana: border-radius uniforme, sombra suave, overflow:hidden garantiza redondeo */
 .sk-viiwlink-window {
-  width: min(100%, 820px) !important;
-  margin: 0 !important;
+  width: min(100%, 820px);
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(17,31,52,.10);
+  box-shadow:
+    0 2px 4px rgba(17,31,52,.04),
+    0 12px 32px rgba(17,31,52,.12),
+    0 32px 80px rgba(17,31,52,.14),
+    0 0 0 1px rgba(255,255,255,.55);
+  background: #fff;
 }
 
+/* Topbar: browser chrome (solo resetear lo que estaba en parche anterior) */
+.sk-viiwlink-topbar {
+  gap: 8px;
+}
+
+/* Grid de 3 columnas: chat | video principal | participantes */
 .sk-viiwlink-content {
-  display: grid !important;
-  grid-template-columns: 210px minmax(360px, 1fr) 140px !important;
-  height: 540px !important;
-  min-height: 0 !important;
-  align-items: stretch !important;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 140px;
+  height: 520px;
+  min-height: 0;
+  align-items: stretch;
 }
 
+/* Columna central: fondo oscuro, flex column */
 .sk-vl-main {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  background: #10265f !important;
-  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0e1520;
+  overflow: hidden;
 }
 
+/* Área de video: ocupa todo el espacio restante */
 .sk-vl-main-video {
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
 }
 
+/* Tile del presentador cubre todo el área de video */
 .sk-vl-presenter-tile {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0e1520;
 }
 
-.sk-vl-main-video video,
+/* Video: ocupa todo, sin recorte inapropiado — top centra la cara */
 .sk-vl-presenter-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center 35% !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
+/* Panel de participantes: columna derecha */
 .sk-vl-participants-panel {
-  height: 100% !important;
-  overflow-y: auto !important;
+  height: 100%;
+  overflow-y: auto;
 }
 
+/* Sidebar chat: columna izquierda */
 .sk-vl-sidebar {
-  height: 100% !important;
-  overflow: hidden !important;
+  height: 100%;
+  overflow: hidden;
 }
 
+/* Responsive */
 @media (max-width: 860px) {
   .sk-viiwlink-content {
-    grid-template-columns: 1fr 130px !important;
-    height: 400px !important;
+    grid-template-columns: 1fr 130px;
+    height: 400px;
   }
-  .sk-vl-sidebar { display: none !important; }
+  .sk-vl-sidebar { display: none; }
 }
 @media (max-width: 600px) {
   .sk-viiwlink-content {
-    grid-template-columns: 1fr !important;
-    height: 320px !important;
+    grid-template-columns: 1fr;
+    height: 300px;
   }
-  .sk-vl-participants-panel { display: none !important; }
+  .sk-vl-participants-panel { display: none; }
 }
 
 /* ===== COMPARATIVA SECTION ===== */
