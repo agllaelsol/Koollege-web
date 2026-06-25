@@ -7738,3 +7738,77 @@ button.sk-video-button {
     display: none !important;
   }
 }
+
+/* =============================================================
+   DASHBOARD MODULE CARDS — paleta premium con degradados ricos
+   ============================================================= */
+
+/* Card: fondo blanco, sombra colorizada por módulo */
+.sk-admin-module-grid article {
+  background: #fff !important;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.04),
+    0 8px 24px color-mix(in srgb, var(--ms) 18%, transparent),
+    0 24px 48px color-mix(in srgb, var(--ms) 10%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+  border: 1px solid color-mix(in srgb, var(--ms) 14%, rgba(255,255,255,.6)) !important;
+  transition: transform .24s ease, box-shadow .24s ease !important;
+}
+
+.sk-admin-module-grid article:hover {
+  transform: translateY(-3px) scale(1.015) !important;
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.05),
+    0 16px 40px color-mix(in srgb, var(--ms) 28%, transparent),
+    0 32px 64px color-mix(in srgb, var(--ms) 14%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+/* Ocultar pseudo-elementos anteriores del glow genérico */
+.sk-admin-module-grid article::before,
+.sk-admin-module-grid article::after {
+  display: none !important;
+}
+
+/* Icono: círculo blanco con borde del color del módulo + degradado interior */
+.sk-admin-console .sk-admin-module-grid i {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  border: 2.5px solid color-mix(in srgb, var(--ms) 55%, transparent) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 38%),
+    linear-gradient(180deg, var(--ms) 0%, var(--me) 100%) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--ms) 12%, transparent),
+    0 6px 16px color-mix(in srgb, var(--me) 35%, transparent) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Icono SVG: blanco */
+.sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
+  width: 22px !important;
+  height: 22px !important;
+  background: #fff !important;
+  -webkit-mask: var(--fa-src) center / contain no-repeat !important;
+  mask: var(--fa-src) center / contain no-repeat !important;
+  filter: none !important;
+}
+
+/* Mobile: franja izquierda usa el mismo degradado */
+@media (max-width: 640px) {
+  .sk-admin-module-grid i {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 40%),
+      linear-gradient(180deg, var(--ms) 0%, var(--me) 100%) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: inset -1px 0 0 rgba(255,255,255,.12) !important;
+  }
+  .sk-admin-module-grid article {
+    box-shadow:
+      0 2px 8px color-mix(in srgb, var(--ms) 14%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--ms) 18%, rgba(255,255,255,.5)) !important;
+  }
+}
