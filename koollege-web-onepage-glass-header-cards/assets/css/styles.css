@@ -7608,22 +7608,20 @@ button.sk-video-button {
    STEP CARDS — flip por tap en mobile (clase .is-flipped)
    ============================================================= */
 
-/* En touch devices activamos el flip vía clase JS en lugar de :hover */
-@media (hover: none) {
+/* En touch devices de escritorio (hover: none pero pantalla grande) — flip 3D normal */
+@media (hover: none) and (min-width: 769px) {
   .sk-step-card .step-card-inner {
     transform-style: preserve-3d !important;
     transition: transform .78s cubic-bezier(.2,.8,.2,1) !important;
   }
   .step-back { display: block !important; }
   .step-front { position: absolute !important; inset: 0 !important; }
-  /* Quitar el flip de :hover en touch — solo JS */
   .sk-step-card:hover .step-card-inner {
     transform: none !important;
   }
   .sk-step-card.is-flipped .step-card-inner {
     transform: rotateY(180deg) !important;
   }
-  /* Hint visual para que el usuario sepa que puede tocar */
   .sk-step-card::after {
     content: "Toca para ver más →";
     position: absolute;
@@ -7636,9 +7634,63 @@ button.sk-video-button {
     color: rgba(255,255,255,.55);
     pointer-events: none;
   }
-  .sk-step-card.is-flipped::after {
-    display: none;
+  .sk-step-card.is-flipped::after { display: none; }
+}
+
+/* En mobile (touch + pantalla pequeña) — fade sin 3D, sin espejo */
+@media (hover: none) and (max-width: 768px) {
+  /* Cancelar todo el 3D */
+  .sk-step-card,
+  .sk-step-card .step-card-inner {
+    transform-style: flat !important;
+    perspective: none !important;
+    transition: none !important;
   }
+  .sk-step-card:hover .step-card-inner,
+  .sk-step-card.is-flipped .step-card-inner {
+    transform: none !important;
+  }
+
+  /* Ambas caras: cancelar backface y rotación propia de .step-back */
+  .step-face {
+    position: relative !important;
+    inset: auto !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  /* Por defecto: mostrar frente, ocultar reverso */
+  .step-back {
+    display: none !important;
+  }
+  .step-front {
+    display: flex !important;
+  }
+
+  /* Al flippear: ocultar frente, mostrar reverso */
+  .sk-step-card.is-flipped .step-front {
+    display: none !important;
+  }
+  .sk-step-card.is-flipped .step-back {
+    display: flex !important;
+  }
+
+  /* Hint visual */
+  .sk-step-card::after {
+    content: "Toca para ver más →";
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    z-index: 10;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.55);
+    pointer-events: none;
+  }
+  .sk-step-card.is-flipped::after { display: none; }
 }
 
 
