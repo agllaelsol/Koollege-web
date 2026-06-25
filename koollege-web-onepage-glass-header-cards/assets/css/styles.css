@@ -7484,6 +7484,75 @@ button.sk-video-button {
     height: 280px !important;
   }
   .sk-vl-participants-panel { display: none !important; }
+
+  /* ── Tira de participantes mobile ── */
+  .sk-vl-mobile-strip {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    background: #111827;
+    overflow: hidden;
+  }
+  .sk-vl-ms-thumb {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1e293b;
+    width: 76px;
+  }
+  .sk-vl-ms-video {
+    width: 76px;
+    height: 54px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .sk-vl-ms-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .sk-vl-ms-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 5px 4px;
+    background: rgba(0,0,0,.45);
+  }
+  .sk-vl-ms-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+  }
+  .sk-vl-ms-name {
+    font-size: .6rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sk-vl-ms-more {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 62px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    letter-spacing: .01em;
+  }
+
   .sk-viiwlink-features {
     grid-template-columns: 1fr 1fr !important;
     gap: 8px !important;
@@ -7495,6 +7564,9 @@ button.sk-video-button {
   .sk-vf-card strong { font-size: .82rem; }
   .sk-vf-card p { font-size: .75rem; }
 }
+
+/* Tira mobile: ocultar en desktop */
+.sk-vl-mobile-strip { display: none; }
 
 /* ── Step cards (Cómo funciona): deshabilitar flip 3D en touch ── */
 @media (max-width: 768px) {
