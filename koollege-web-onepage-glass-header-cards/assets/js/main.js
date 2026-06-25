@@ -270,25 +270,59 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
   });
 })();
 
-// ===== LOGIN DROPDOWN =====
+// ===== LOGIN POPUP + BOTTOM SHEET =====
 (function () {
-  const btn  = document.getElementById("login-btn");
-  const menu = document.getElementById("login-menu");
-  if (!btn || !menu) return;
+  const btn      = document.getElementById("login-btn");
+  const popup    = document.getElementById("lp-popup");
+  const sheet    = document.getElementById("lp-sheet");
+  const backdrop = document.getElementById("lp-backdrop");
+  const sheetClose = document.getElementById("lp-sheet-close");
+  if (!btn) return;
 
-  const items = () => [...menu.querySelectorAll("[role='menuitem']")];
+  const isMobile = () => window.matchMedia("(max-width: 700px)").matches;
 
-  function open() {
-    menu.removeAttribute("hidden");
+  // ── Desktop popup ──────────────────────────────────────────
+  function popupOpen() {
+    if (!popup) return;
+    popup.removeAttribute("hidden");
+    popup.style.visibility = "";
     btn.setAttribute("aria-expanded", "true");
-    // Focus primer ítem para navegación por teclado
-    items()[0]?.focus();
+    popup.querySelector(".lp-item")?.focus();
   }
 
-  function close() {
-    menu.setAttribute("hidden", "");
+  function popupClose() {
+    if (!popup) return;
+    popup.setAttribute("hidden", "");
     btn.setAttribute("aria-expanded", "false");
   }
+
+  // ── Mobile bottom sheet ────────────────────────────────────
+  function sheetOpen() {
+    if (!sheet || !backdrop) return;
+    sheet.removeAttribute("hidden");
+    backdrop.removeAttribute("hidden");
+    sheet.style.visibility = "";
+    backdrop.style.visibility = "";
+    document.body.style.overflow = "hidden";
+    btn.setAttribute("aria-expanded", "true");
+    // Pequeño delay para que la transición CSS funcione
+    requestAnimationFrame(() => {
+      sheet.removeAttribute("hidden");
+      backdrop.removeAttribute("hidden");
+    });
+  }
+
+  function sheetClose() {
+    if (!sheet || !backdrop) return;
+    sheet.setAttribute("hidden", "");
+    backdrop.setAttribute("hidden", "");
+    document.body.style.overflow = "";
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  // ── Toggle según viewport ──────────────────────────────────
+  function open()  { isMobile() ? sheetOpen()  : popupOpen();  }
+  function close() { isMobile() ? sheetClose() : popupClose(); }
 
   function toggle() {
     btn.getAttribute("aria-expanded") === "true" ? close() : open();
@@ -296,26 +330,62 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
 
   btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
 
-  // Cerrar al hacer clic fuera
+  // Cerrar popup desktop al click fuera
   document.addEventListener("click", (e) => {
-    if (!document.getElementById("login-wrap")?.contains(e.target)) close();
+    if (!isMobile() && popup && !document.getElementById("login-wrap")?.contains(e.target)) {
+      popupClose();
+    }
   });
 
-  // Navegación por teclado: ArrowDown/Up entre items, Escape para cerrar
-  menu.addEventListener("keydown", (e) => {
-    const list = items();
-    const idx  = list.indexOf(document.activeElement);
-    if (e.key === "ArrowDown") { e.preventDefault(); list[(idx + 1) % list.length]?.focus(); }
-    if (e.key === "ArrowUp")   { e.preventDefault(); list[(idx - 1 + list.length) % list.length]?.focus(); }
-    if (e.key === "Escape")    { close(); btn.focus(); }
-    if (e.key === "Tab")       { close(); }
+  // Cerrar backdrop/sheet en mobile
+  backdrop?.addEventListener("click", sheetClose);
+  sheetClose?.addEventListener("click", sheetClose);
+
+  // ── Swipe-to-close en el sheet ─────────────────────────────
+  if (sheet) {
+    let startY = 0;
+    let currentY = 0;
+
+    sheet.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+      currentY = startY;
+      sheet.style.transition = "none";
+    }, { passive: true });
+
+    sheet.addEventListener("touchmove", (e) => {
+      currentY = e.touches[0].clientY;
+      const delta = Math.max(0, currentY - startY);
+      sheet.style.transform = `translateY(${delta}px)`;
+      backdrop.style.opacity = String(Math.max(0, 1 - delta / 260));
+    }, { passive: true });
+
+    sheet.addEventListener("touchend", () => {
+      sheet.style.transition = "";
+      const delta = currentY - startY;
+      if (delta > 80) {
+        sheet.style.transform = "";
+        sheetClose();
+      } else {
+        sheet.style.transform = "translateY(0)";
+        backdrop.style.opacity = "";
+      }
+    });
+  }
+
+  // ── Teclado ────────────────────────────────────────────────
+  [popup, sheet].forEach((panel) => {
+    panel?.addEventListener("keydown", (e) => {
+      const items = [...(panel.querySelectorAll(".lp-item"))];
+      const idx = items.indexOf(document.activeElement);
+      if (e.key === "ArrowDown") { e.preventDefault(); items[(idx + 1) % items.length]?.focus(); }
+      if (e.key === "ArrowUp")   { e.preventDefault(); items[(idx - 1 + items.length) % items.length]?.focus(); }
+      if (e.key === "Escape")    { close(); btn.focus(); }
+      if (e.key === "Tab" && panel === popup) popupClose();
+    });
   });
 
   btn.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
-    if (e.key === "ArrowDown" && btn.getAttribute("aria-expanded") === "true") {
-      e.preventDefault(); items()[0]?.focus();
-    }
   });
 })();
 
