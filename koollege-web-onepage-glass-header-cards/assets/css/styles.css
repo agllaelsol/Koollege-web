@@ -5795,7 +5795,7 @@ section[id] {
 /* Dashboard: contenido sólido, nada visible detrás */
 .sk-admin-console .sk-admin-module-grid,
 .sk-product-grid.sk-admin-mock {
-  background: #fff;
+  background: transparent;
 }
 
 .sk-admin-console {
