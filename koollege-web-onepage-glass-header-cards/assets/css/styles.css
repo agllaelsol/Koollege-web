@@ -7477,3 +7477,159 @@ button.sk-video-button {
     border-radius: 14px;
   }
 }
+
+/* =============================================================
+   MOBILE OVERRIDES — bloque definitivo, se aplica al final
+   para sobrepasar cualquier !important anterior via especificidad
+   en media query.
+   ============================================================= */
+
+/* ── ViiwLink ── */
+@media (max-width: 960px) {
+  .sk-viiwlink-inner {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  .sk-viiwlink-section {
+    padding: 64px 0 64px !important;
+    overflow: hidden;
+  }
+  .sk-viiwlink-window {
+    width: 100% !important;
+    border-radius: 14px !important;
+  }
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr 130px !important;
+    height: 360px !important;
+  }
+  .sk-vl-sidebar { display: none !important; }
+  .sk-viiwlink-copy h2 {
+    font-size: clamp(1.9rem, 6vw, 2.6rem) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .sk-viiwlink-content {
+    grid-template-columns: 1fr !important;
+    height: 280px !important;
+  }
+  .sk-vl-participants-panel { display: none !important; }
+  .sk-viiwlink-features {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .sk-vf-card {
+    padding: 12px 12px !important;
+    border-radius: 12px !important;
+  }
+  .sk-vf-card strong { font-size: .82rem; }
+  .sk-vf-card p { font-size: .75rem; }
+}
+
+/* ── Step cards (Cómo funciona): deshabilitar flip 3D en touch ── */
+@media (max-width: 768px) {
+  /* Aplanar el 3D para evitar bug backface-visibility en Safari mobile */
+  .step-card-inner {
+    transform-style: flat !important;
+    min-height: 340px !important;
+    transition: none !important;
+  }
+  .sk-step-card:hover .step-card-inner,
+  .sk-step-card:focus-within .step-card-inner {
+    transform: none !important;
+  }
+  /* Ocultar cara trasera — contenido de bullets se mueve al frente si se quiere */
+  .step-back { display: none !important; }
+  /* Cara frontal ocupa todo */
+  .step-front {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-height: 340px !important;
+    border-radius: 20px !important;
+  }
+  .sk-steps .sk-step-card {
+    min-height: 340px !important;
+    overflow: hidden !important;
+  }
+  .sk-steps {
+    gap: 14px !important;
+  }
+}
+
+/* ── Cookie banner: compacto en mobile ── */
+@media (max-width: 640px) {
+  .cookie-banner {
+    bottom: env(safe-area-inset-bottom, 12px) !important;
+    width: calc(100% - 24px) !important;
+    border-radius: 14px !important;
+  }
+  .cookie-banner__inner {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px 16px !important;
+  }
+  .cookie-banner__body { display: none !important; }
+  .cookie-banner__title { font-size: .8rem; margin: 0; }
+  .cookie-banner__text { flex: 1; min-width: 0; }
+  .cookie-banner__actions {
+    flex-direction: column !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+  }
+  .cookie-btn--accept,
+  .cookie-btn--reject {
+    flex: none !important;
+    padding: 8px 14px !important;
+    font-size: .75rem !important;
+  }
+  .cookie-btn--manage { display: none !important; }
+}
+
+/* ── Compactness general en mobile ── */
+@media (max-width: 640px) {
+  /* Secciones menos altas */
+  .sk-ai-overview,
+  .sk-orbit-section,
+  .sk-pricing,
+  .sk-comparison,
+  .sk-faq-section,
+  .sk-section,
+  #como-funciona.sk-section {
+    padding: 56px 0 !important;
+  }
+
+  /* Cards con menos padding */
+  .sk-vf-card,
+  .sk-plan-feature-row,
+  .faq-item {
+    padding: 12px !important;
+  }
+
+  /* Footer social más compacto */
+  .footer-grid {
+    gap: 28px !important;
+  }
+
+  /* Prevenir overflow horizontal global */
+  body {
+    overflow-x: hidden;
+  }
+  .sk-viiwlink-section,
+  .sk-hero,
+  .sk-section,
+  .site-footer {
+    overflow-x: hidden;
+  }
+}
+
+/* ── Precio cards en 1 columna en mobile ── */
+@media (max-width: 640px) {
+  .pricing-showcase .sk-price-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 !important;
+  }
+}
