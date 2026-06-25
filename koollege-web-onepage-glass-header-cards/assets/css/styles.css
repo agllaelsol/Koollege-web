@@ -5815,7 +5815,7 @@ section[id] {
   flex-direction: column;
   align-items: center;
   padding: 0 0 16px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 16px;
   /* Borde exterior que recoge el color del módulo en hover */
   border: 1.5px solid rgba(255,255,255,.6);
@@ -5844,7 +5844,7 @@ section[id] {
   /* 38% de la min-height (128px) ≈ 48px, coincide con la referencia */
   height: 52px;
   flex-shrink: 0;
-  border-radius: 0;
+  border-radius: 14px 14px 0 0;
   /* Degradado: color puro arriba → 20% más oscuro abajo (mismo matiz) */
   background: linear-gradient(
     180deg,
