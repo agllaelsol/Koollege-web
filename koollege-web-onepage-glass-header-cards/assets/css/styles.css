@@ -7795,6 +7795,46 @@ button.sk-video-button {
   }
 }
 
+/* Mobile: restaurar layout horizontal que estaba funcionando */
+@media (max-width: 640px) {
+  .sk-admin-module-grid article {
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0 !important;
+    min-height: 72px !important;
+    max-height: 84px !important;
+    background: #fff !important;
+    border-radius: 18px !important;
+  }
+
+  .sk-admin-module-grid i {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 100% !important;
+    min-height: 72px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: var(--ms) !important;
+  }
+
+  .sk-admin-module-grid .module-icon .fa-icon {
+    background: #fff !important;
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .sk-admin-module-grid strong {
+    flex: 1 !important;
+    max-width: none !important;
+    padding: 0 16px !important;
+    font-size: .85rem !important;
+    text-align: left !important;
+    color: #111f34 !important;
+  }
+}
+
 /* =============================================================
    LOGIN POPUP — reconstrucción completa (desktop)
    El CSS anterior de .login-menu* queda anulado por este bloque
