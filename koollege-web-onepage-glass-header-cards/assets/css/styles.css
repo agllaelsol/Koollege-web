@@ -7737,7 +7737,7 @@ button.sk-video-button {
   }
 
   /* Card: fila, sin padding, fondo blanco, sin mínimo de alto fijo */
-  .sk-admin-module-grid article {
+  .sk-admin-console .sk-admin-module-grid article {
     flex-direction: row !important;
     align-items: stretch !important;
     padding: 0 !important;
@@ -7749,8 +7749,8 @@ button.sk-video-button {
     box-shadow: 0 2px 8px rgba(17,31,52,.08) !important;
   }
 
-  /* Columna izquierda: bloque de color sólido, border-radius izquierdo */
-  .sk-admin-module-grid i {
+  /* Columna izquierda: bloque de color sólido — misma especificidad que desktop */
+  .sk-admin-console .sk-admin-module-grid i {
     flex: 0 0 72px !important;
     width: 72px !important;
     height: auto !important;
@@ -7765,7 +7765,7 @@ button.sk-video-button {
   }
 
   /* Icono: blanco puro, sin círculo, sin glow */
-  .sk-admin-module-grid .module-icon .fa-icon {
+  .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
     background: rgba(255,255,255,.95) !important;
     -webkit-mask: var(--fa-src) center / contain no-repeat !important;
     mask: var(--fa-src) center / contain no-repeat !important;
@@ -7775,7 +7775,7 @@ button.sk-video-button {
   }
 
   /* Texto: columna derecha */
-  .sk-admin-module-grid strong {
+  .sk-admin-console .sk-admin-module-grid strong {
     flex: 1 !important;
     display: flex !important;
     align-items: center !important;
