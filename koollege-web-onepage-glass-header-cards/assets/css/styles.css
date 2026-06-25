@@ -5803,29 +5803,31 @@ section[id] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MODULE CARDS — v3 premium (referencia visual adjunta)
-   Estructura: franja 38% superior con degradado + reflejo diagonal,
-   área blanca inferior, ícono círculo blanco sobre franja.
-   Glow del módulo en reposo, más intenso en hover.
-   Sin glassmorphism. Sin cambios de layout, colores, iconos.
+   MODULE CARDS — v4 definitivo
+   Degradado en background directo del article (sin ::before en flex).
+   Franja de color ocupa los primeros 52px. Ícono centrado en la línea
+   de separación gracias a padding-top: 28px (52-24 = mitad del ícono).
 ═══════════════════════════════════════════════════════════════ */
 .sk-admin-console .sk-admin-module-grid article {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 0 16px;
-  overflow: visible;
+  /* 28px top = sitúa el centro del ícono (48px/2=24px) justo en y=52px */
+  padding: 28px 0 16px;
+  overflow: hidden;
   border-radius: 16px;
-  /* Borde exterior que recoge el color del módulo en hover */
   border: 1.5px solid rgba(255,255,255,.6);
-  background: #fff;
-  /* Shadow base + glow sutil del módulo en reposo */
+  /* Franja de color arriba, blanco abajo — corte limpio en 52px */
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 60%) top / 100% 52px no-repeat,
+    linear-gradient(180deg, var(--ms) 0%, var(--me) 100%) top / 100% 52px no-repeat,
+    #fff;
   box-shadow:
     0 1px 2px rgba(17,31,52,.04),
     0 4px 12px rgba(17,31,52,.07),
     0 12px 24px rgba(17,31,52,.06),
-    0 0 20px color-mix(in srgb, var(--module) 14%, transparent);
+    0 0 20px rgba(0,0,0,.04);
   transform: translateZ(0);
   transition:
     transform 250ms cubic-bezier(.22,1,.36,1),
@@ -5833,51 +5835,13 @@ section[id] {
     border-color 250ms ease;
 }
 
-/* ── Franja superior: 38% de altura de la card ── */
-/* ::before = fondo de color sólido + degradado oscurecimiento abajo */
-.sk-admin-console .sk-admin-module-grid article::before {
-  content: "";
-  display: block;
-  position: static;
-  inset: auto;
-  width: 100%;
-  /* 38% de la min-height (128px) ≈ 48px, coincide con la referencia */
-  height: 52px;
-  flex-shrink: 0;
-  border-radius: 14px 14px 0 0;
-  /* Degradado: color puro arriba → 20% más oscuro abajo (mismo matiz) */
-  background: linear-gradient(
-    180deg,
-    var(--module) 0%,
-    color-mix(in srgb, var(--module) 78%, #000) 100%
-  );
-  opacity: 1;
-  filter: none;
-  transform: none;
-}
-
-/* ── Reflejo diagonal — capa de vidrio premium sobre la franja ── */
-/* ::after = degradado 120deg blanco→transparente, cubre solo la franja */
+/* Neutralizar ::before y ::after — ya no se usan */
+.sk-admin-console .sk-admin-module-grid article::before,
 .sk-admin-console .sk-admin-module-grid article::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* Mismo alto que la franja + algo extra para degradado suave */
-  height: 72px;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,.22) 0%,
-    rgba(255,255,255,.06) 55%,
-    rgba(255,255,255,0) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-  border-radius: 0;
+  display: none !important;
 }
 
-/* ── Ícono: círculo blanco con color del módulo ── */
+/* ── Ícono: círculo blanco centrado en la línea franja/blanco ── */
 .sk-admin-console .sk-admin-module-grid i {
   position: relative;
   z-index: 3;
@@ -5885,17 +5849,16 @@ section[id] {
   place-items: center;
   width: 48px;
   height: 48px;
-  /* Flota sobre la línea de separación franja/blanco */
-  margin: -24px auto 12px;
+  margin: 0 auto 12px;
   border-radius: 50%;
-  /* Fondo blanco, color del módulo en el ícono — como en la referencia */
   background: #fff;
   color: var(--module);
   border: none;
+  flex-shrink: 0;
   box-shadow:
     0 2px 8px rgba(17,31,52,.14),
-    0 0 0 2px rgba(255,255,255,.9),
-    0 0 0 3.5px color-mix(in srgb, var(--module) 40%, transparent);
+    0 0 0 2.5px rgba(255,255,255,.95),
+    0 0 0 4px var(--ms);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   transition:
