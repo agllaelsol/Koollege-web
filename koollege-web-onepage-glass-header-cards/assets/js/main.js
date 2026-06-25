@@ -276,7 +276,7 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
   const popup    = document.getElementById("lp-popup");
   const sheet    = document.getElementById("lp-sheet");
   const backdrop = document.getElementById("lp-backdrop");
-  const sheetClose = document.getElementById("lp-sheet-close");
+  const sheetCloseBtn = document.getElementById("lp-sheet-close");
   if (!btn) return;
 
   const isMobile = () => window.matchMedia("(max-width: 700px)").matches;
@@ -339,7 +339,7 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
 
   // Cerrar backdrop/sheet en mobile
   backdrop?.addEventListener("click", sheetClose);
-  sheetClose?.addEventListener("click", sheetClose);
+  sheetCloseBtn?.addEventListener("click", sheetClose);
 
   // ── Swipe-to-close en el sheet ─────────────────────────────
   if (sheet) {
