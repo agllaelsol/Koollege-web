@@ -7713,16 +7713,26 @@ button.sk-video-button {
    DASHBOARD MODULE CARDS — paleta premium con degradados ricos
    ============================================================= */
 
-/* Card: fondo blanco, sombra colorizada por módulo */
+/* Card: franja de color arriba (52px) + blanco abajo */
 .sk-admin-module-grid article {
-  background: #fff !important;
+  background: linear-gradient(
+    180deg,
+    var(--ms) 0px,
+    var(--me) 52px,
+    #fff 52px
+  ) !important;
   box-shadow:
     0 2px 4px rgba(0,0,0,.04),
     0 8px 24px color-mix(in srgb, var(--ms) 18%, transparent),
-    0 24px 48px color-mix(in srgb, var(--ms) 10%, transparent),
-    inset 0 1px 0 rgba(255,255,255,.9) !important;
-  border: 1px solid color-mix(in srgb, var(--ms) 14%, rgba(255,255,255,.6)) !important;
+    0 24px 48px color-mix(in srgb, var(--ms) 10%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--ms) 20%, rgba(255,255,255,.6)) !important;
   transition: transform .24s ease, box-shadow .24s ease !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 28px 0 16px !important;
 }
 
 .sk-admin-module-grid article:hover {
@@ -7734,33 +7744,35 @@ button.sk-video-button {
     inset 0 1px 0 rgba(255,255,255,.9) !important;
 }
 
-/* Ocultar pseudo-elementos anteriores del glow genérico */
+/* Pseudo-elementos no usados — se neutralizan sin display:none para no interferir */
 .sk-admin-module-grid article::before,
 .sk-admin-module-grid article::after {
   display: none !important;
 }
 
-/* Icono: círculo blanco con borde del color del módulo + degradado interior */
+/* Icono: círculo blanco con anillo del color del módulo */
 .sk-admin-console .sk-admin-module-grid i {
   width: 48px !important;
   height: 48px !important;
   border-radius: 50% !important;
-  border: 2.5px solid color-mix(in srgb, var(--ms) 55%, transparent) !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 38%),
-    linear-gradient(180deg, var(--ms) 0%, var(--me) 100%) !important;
+  border: none !important;
+  background: #fff !important;
+  color: var(--ms) !important;
   box-shadow:
-    0 0 0 4px color-mix(in srgb, var(--ms) 12%, transparent),
-    0 6px 16px color-mix(in srgb, var(--me) 35%, transparent) !important;
+    0 2px 8px rgba(17,31,52,.18),
+    0 0 0 2.5px rgba(255,255,255,.95),
+    0 0 0 4px var(--ms) !important;
+  flex-shrink: 0 !important;
+  margin: 0 auto 12px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* Icono SVG: blanco */
+/* Icono SVG: color del módulo via mask */
 .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
   width: 22px !important;
   height: 22px !important;
-  background: #fff !important;
+  background: var(--ms) !important;
   -webkit-mask: var(--fa-src) center / contain no-repeat !important;
   mask: var(--fa-src) center / contain no-repeat !important;
   filter: none !important;
