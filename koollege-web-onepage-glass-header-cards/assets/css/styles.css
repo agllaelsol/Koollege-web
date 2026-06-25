@@ -4785,7 +4785,7 @@ section[id] {
 
 /* 2. Portafolio → ViiwLink */
 .sk-viiwlink-section {
-  padding: 120px 0 130px;
+  padding: 80px 0 80px;
   background: #fff;
   overflow: hidden;
 }
@@ -4808,36 +4808,36 @@ section[id] {
   font-weight: 700;
   letter-spacing: .05em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .sk-viiwlink-copy h2 {
   max-width: 460px;
-  margin: 0 0 18px;
+  margin: 0 0 12px;
   color: var(--navy);
-  font-size: clamp(2.8rem, 4vw, 4.4rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 2.8vw, 3rem);
+  line-height: 1.08;
   text-wrap: balance;
 }
 
 .sk-viiwlink-copy > p {
   max-width: 460px;
   color: var(--muted);
-  font-size: 1.05rem;
-  margin-bottom: 38px;
+  font-size: .97rem;
+  margin-bottom: 22px;
 }
 
 .sk-viiwlink-features {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 10px;
   max-width: 460px;
 }
 
 .sk-vf-card {
-  padding: 20px;
+  padding: 14px 16px;
   border: 1px solid rgba(17,31,52,.09);
-  border-radius: 18px;
+  border-radius: 14px;
   background: rgba(255,255,255,.7);
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 28px rgba(17,31,52,.06);
@@ -5349,10 +5349,7 @@ section[id] {
   display: none;
 }
 
-/* Section spacing: enough gap between how-it-works and viiwlink */
-.sk-viiwlink-section {
-  padding-top: 80px;
-}
+/* Section spacing: definido en bloque base */
 
 /* ===== v20260623-FIX2 ===== */
 
@@ -6320,16 +6317,16 @@ section[id] {
 
 /* 3. ViiwLink — logo, layout, mockup */
 .sk-viiwlink-logo-img {
-  width: 200px;
+  width: 100px;
   height: auto;
   max-width: none;
   display: block;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 }
 
 .sk-viiwlink-inner {
-  grid-template-columns: 38% 62% !important;
-  gap: 56px !important;
+  grid-template-columns: 40% 60% !important;
+  gap: 48px !important;
   align-items: center !important;
   min-height: auto !important;
 }
@@ -7391,15 +7388,6 @@ button.sk-video-button {
 }
 
 /* ===== ITEM 4: ViiwLink layout — alineación vertical central ===== */
-
-.sk-viiwlink-section {
-  display: flex;
-  align-items: stretch;
-}
-
-.sk-viiwlink-inner {
-  align-items: center !important;
-}
 
 /* ===== ITEM 6: Video tour modal ===== */
 
