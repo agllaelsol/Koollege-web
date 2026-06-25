@@ -8115,3 +8115,24 @@ button.sk-video-button {
   .lp-sheet,
   .lp-backdrop { display: none !important; }
 }
+
+/* ── Dashboard mobile: franja izquierda (override de especificidad) ── */
+@media (max-width: 640px) {
+  .sk-admin-console .sk-admin-module-grid i {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 100% !important;
+    min-height: 72px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 40%),
+      linear-gradient(180deg, var(--ms) 0%, var(--me) 100%) !important;
+    box-shadow: inset -1px 0 0 rgba(255,255,255,.12) !important;
+  }
+  .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
+    width: 26px !important;
+    height: 26px !important;
+    background: #fff !important;
+  }
+}
