@@ -7764,9 +7764,10 @@ button.sk-video-button {
     place-items: center !important;
   }
 
-  /* Icono: blanco puro, sin círculo, sin glow */
+  /* Icono: blanco puro via mask — background blanco recortado por la forma SVG */
   .sk-admin-console .sk-admin-module-grid .module-icon .fa-icon {
-    background: rgba(255,255,255,.95) !important;
+    display: block !important;
+    background: #fff !important;
     -webkit-mask: var(--fa-src) center / contain no-repeat !important;
     mask: var(--fa-src) center / contain no-repeat !important;
     width: 26px !important;
