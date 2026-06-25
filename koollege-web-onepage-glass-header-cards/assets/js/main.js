@@ -407,3 +407,26 @@ function showFormStatus(msg, type) {
   formStatus.className = "form-status form-status--" + type;
   formStatus.removeAttribute("hidden");
 }
+
+/* ── Step cards: flip por tap en dispositivos touch ── */
+(function () {
+  const isTouch = window.matchMedia("(hover: none)").matches;
+  if (!isTouch) return;
+
+  document.querySelectorAll(".sk-step-card").forEach((card) => {
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-label", "Toca para ver más detalles");
+
+    function flipCard(e) {
+      e.preventDefault();
+      const flipped = card.classList.toggle("is-flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    }
+
+    card.addEventListener("click", flipCard);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") flipCard(e);
+    });
+  });
+})();
