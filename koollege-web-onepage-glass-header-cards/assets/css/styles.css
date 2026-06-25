@@ -5353,6 +5353,11 @@ section[id] {
 
 /* ===== v20260623-FIX2 ===== */
 
+/* Mapear --ms/--me al alias --module que usa todo el CSS */
+.sk-admin-module-grid article {
+  --module: var(--ms);
+}
+
 /* Fix 1 — Module cards: restore colored-header-top design */
 .sk-admin-module-grid article {
   display: flex;
