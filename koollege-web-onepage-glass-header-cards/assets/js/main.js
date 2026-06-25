@@ -328,7 +328,15 @@ document.querySelectorAll(".sk-rail, .sk-portfolio-track").forEach((rail) => {
     btn.getAttribute("aria-expanded") === "true" ? close() : open();
   }
 
-  btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    // En mobile: cierra el nav antes de abrir el sheet
+    if (isMobile()) {
+      document.body.classList.remove("nav-open");
+      document.querySelector("[data-menu-button]")?.setAttribute("aria-expanded", "false");
+    }
+    toggle();
+  });
 
   // Cerrar popup desktop al click fuera
   document.addEventListener("click", (e) => {
